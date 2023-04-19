@@ -1,0 +1,23 @@
+{
+    "name": "hichemtab-tech/tokens-validation",
+    "description": "TokensValidation is a PHP library designed to generate and verify authentication and confirmation tokens dynamically. It is ideal for web applications and software that require secure user authentication and authorization. The library generates authentication and confirmation tokens that can be used to log in users, reset passwords, and confirm email addresses.",
+    "autoload": {
+        "psr-4": {
+            "HichemtabTech\\TokensValidation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "HichemTab",
+            "email": "konanhichemsinshi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "illuminate/database": "^9.52",
+        "illuminate/events": "^9.52",
+        "illuminate/container": "^9.52",
+        "jwage/purl": "^0.0.9",
+        "defuse/php-encryption": "^2.3"
+    }
+}
