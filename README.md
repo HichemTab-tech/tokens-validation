@@ -347,5 +347,5 @@ To identify and troubleshoot errors that may occur, you can utilize the **$resul
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/HichemTab-tech/tokens-validation/blob/master/LICENSE)
 
