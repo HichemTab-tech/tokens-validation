@@ -28,7 +28,7 @@
                 "HichemtabTech\\TokensValidation\\Laravel\\Providers\\TokensValidationProvider"
             ],
             "config": {
-                "my-library": "HichemtabTech\\TokensValidation\\Laravel\\config/tokensvalidation.php"
+                "tokensvalidation": "HichemtabTech\\TokensValidation\\Laravel\\config\\tokensvalidation.php"
             }
         }
     }
