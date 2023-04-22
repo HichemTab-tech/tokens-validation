@@ -21,5 +21,15 @@
         "illuminate/container": "^9.52",
         "jwage/purl": "^0.0.9",
         "defuse/php-encryption": "^2.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HichemtabTech\\TokensValidation\\Laravel\\Providers\\TokensValidationProvider"
+            ],
+            "config": {
+                "my-library": "HichemtabTech\\TokensValidation\\Laravel\\config/tokensvalidation.php"
+            }
+        }
     }
 }

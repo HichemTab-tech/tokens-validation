@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Actions\confirmation;
+namespace HichemtabTech\TokensValidation\Actions\Confirmation;
 
 use RuntimeException;
 

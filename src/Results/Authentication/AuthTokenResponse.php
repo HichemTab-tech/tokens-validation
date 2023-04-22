@@ -1,9 +1,9 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\results\authentication;
+namespace HichemtabTech\TokensValidation\Results\Authentication;
 
-use HichemtabTech\TokensValidation\Model\authentication\AuthToken;
-use HichemtabTech\TokensValidation\results\BaseResults;
+use HichemtabTech\TokensValidation\Model\Authentication\AuthToken;
+use HichemtabTech\TokensValidation\Results\BaseResults;
 
 /**
  * Represents the response of an authentication token request.

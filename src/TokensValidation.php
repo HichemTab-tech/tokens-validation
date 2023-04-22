@@ -4,19 +4,19 @@ namespace HichemtabTech\TokensValidation;
 
 use DateTime;
 use Exception;
-use HichemtabTech\TokensValidation\Actions\authentication\AuthTokenCookiesHandler;
-use HichemtabTech\TokensValidation\Actions\authentication\AuthTokenGenerator;
-use HichemtabTech\TokensValidation\Actions\confirmation\ConfirmationCodeGenerator;
-use HichemtabTech\TokensValidation\Actions\confirmation\ConfirmationUrlBuilder;
-use HichemtabTech\TokensValidation\Actions\confirmation\UserIdAndToken;
+use HichemtabTech\TokensValidation\Actions\Authentication\AuthTokenCookiesHandler;
+use HichemtabTech\TokensValidation\Actions\Authentication\AuthTokenGenerator;
+use HichemtabTech\TokensValidation\Actions\Confirmation\ConfirmationCodeGenerator;
+use HichemtabTech\TokensValidation\Actions\Confirmation\ConfirmationUrlBuilder;
+use HichemtabTech\TokensValidation\Actions\Confirmation\UserIdAndToken;
 use HichemtabTech\TokensValidation\Actions\UserIdEncrypter;
-use HichemtabTech\TokensValidation\Model\authentication\AuthToken;
-use HichemtabTech\TokensValidation\Model\authentication\AuthTokenModel;
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationsTokenTypes;
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationToken;
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationTokenModel;
-use HichemtabTech\TokensValidation\results\authentication\AuthTokenResponse;
-use HichemtabTech\TokensValidation\results\confirmation\ConfirmationTokenResponse;
+use HichemtabTech\TokensValidation\Model\Authentication\AuthToken;
+use HichemtabTech\TokensValidation\Model\Authentication\AuthTokenModel;
+use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationsTokenTypes;
+use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationToken;
+use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationTokenModel;
+use HichemtabTech\TokensValidation\Results\Authentication\AuthTokenResponse;
+use HichemtabTech\TokensValidation\Results\Confirmation\ConfirmationTokenResponse;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -28,22 +28,36 @@ class TokensValidation
     /**
      * @var string $DB_NAME
      */
-    private static string $DB_NAME;
+    private static string $DB_NAME = '';
 
     /**
      * @var string $DB_PASS
      */
-    private static string $DB_PASS;
+    private static string $DB_PASS = '';
 
     /**
      * @var string $DB_USER
      */
-    private static string $DB_USER;
+    private static string $DB_USER = '';
 
     /**
      * @var string $DB_HOST
      */
-    private static string $DB_HOST;
+    private static string $DB_HOST = '';
+
+    /**
+     * @var array
+     */
+    private static array $config;
+
+    /**
+     * @param array $config
+     * @noinspection PhpUnused
+     */
+    public static function setConfig(array $config): void
+    {
+        self::$config = $config;
+    }
 
     /**
      * @var float|int
@@ -199,13 +213,9 @@ class TokensValidation
     {
         $capsule = new Capsule;
 
-        $capsule->addConnection([
-            'driver' => 'mysql',
-            'host' => self::getDBHOST(),
-            'database' => self::getDBNAME(),
-            'username' => self::getDBUSER(),
-            'password' => self::getDBPASS(),
-        ]);
+        self::prepareConfig();
+
+        $capsule->addConnection(self::$config['connections']['mysql']);
 
         // Make this Capsule instance available globally via static methods... (optional)
         $capsule->setAsGlobal();
@@ -239,6 +249,25 @@ class TokensValidation
                 $table->timestamps();
             });
         }
+    }
+
+    private static function prepareConfig(): void
+    {
+        if (isset(self::$config) AND self::$config != null) {
+            self::$config = array_replace_recursive(DefaultConfig::get(), self::$config);
+        }
+        else{
+            self::$config = DefaultConfig::get();
+        }
+
+        self::$AuthTokenExpirationDelay = self::$config['AuthTokens']['expirationDelay'];
+        self::$AuthTokenGenerator = self::$config['AuthTokens']['AuthTokenGenerator'];
+        self::$AuthTokenCookiesHandler = self::$config['AuthTokens']['AuthTokenCookiesHandler'];
+
+        self::$ConfirmationTokenExpirationDelay = self::$config['ConfirmationToken']['expirationDelay'];
+        self::$ConfirmationUrlBuilder = self::$config['ConfirmationToken']['ConfirmationUrlBuilder'];
+        self::$ConfirmationCodeGenerator = self::$config['ConfirmationToken']['ConfirmationCodeGenerator'];
+        self::$UserIdEncrypter = self::$config['ConfirmationToken']['UserIdEncrypter'];
     }
 
     /**
@@ -503,6 +532,7 @@ class TokensValidation
      * @param string $url
      * @param string $whatFor
      * @return ConfirmationTokenResponse
+     * @noinspection PhpUnused
      */
     public static function checkConfirmationUrl(string $url, string $whatFor = "default"): ConfirmationTokenResponse
     {
@@ -522,6 +552,7 @@ class TokensValidation
      * @param array $_GET_ARRAY
      * @param string $whatFor
      * @return ConfirmationTokenResponse
+     * @noinspection PhpUnused
      */
     public static function checkConfirmationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default"): ConfirmationTokenResponse
     {

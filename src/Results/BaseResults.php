@@ -1,6 +1,6 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
-namespace HichemtabTech\TokensValidation\results;
+namespace HichemtabTech\TokensValidation\Results;
 
 use Exception;
 use HichemtabTech\TokensValidation\BaseResultsBuilder;

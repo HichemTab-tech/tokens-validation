@@ -1,9 +1,9 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\results\authentication;
+namespace HichemtabTech\TokensValidation\Results\Authentication;
 
 use HichemtabTech\TokensValidation\BaseResultsBuilder;
-use HichemtabTech\TokensValidation\Model\authentication\AuthToken;
+use HichemtabTech\TokensValidation\Model\Authentication\AuthToken;
 
 /**
  * Builds instances of the AuthTokenResponse class.

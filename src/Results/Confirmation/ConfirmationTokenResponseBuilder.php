@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\results\confirmation;
+namespace HichemtabTech\TokensValidation\Results\Confirmation;
 
 use HichemtabTech\TokensValidation\BaseResultsBuilder;
 

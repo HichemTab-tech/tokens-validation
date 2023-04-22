@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Model\confirmation;
+namespace HichemtabTech\TokensValidation\Model\Confirmation;
 
 class ConfirmationsTokenTypes
 {

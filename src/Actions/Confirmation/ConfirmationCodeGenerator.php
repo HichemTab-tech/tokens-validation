@@ -1,8 +1,8 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Actions\confirmation;
+namespace HichemtabTech\TokensValidation\Actions\Confirmation;
 
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationsTokenTypes;
+use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationsTokenTypes;
 use HichemtabTech\TokensValidation\TokensValidation;
 
 /**

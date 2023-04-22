@@ -1,6 +1,5 @@
 <?php
 
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationsTokenTypes;
 use HichemtabTech\TokensValidation\TokensValidation;
 
 require 'vendor/autoload.php';

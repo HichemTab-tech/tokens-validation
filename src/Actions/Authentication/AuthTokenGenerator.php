@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Actions\authentication;
+namespace HichemtabTech\TokensValidation\Actions\Authentication;
 
 use HichemtabTech\TokensValidation\TokensValidation;
 

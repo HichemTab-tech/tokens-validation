@@ -1,8 +1,8 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\results\confirmation;
+namespace HichemtabTech\TokensValidation\Results\Confirmation;
 
-use HichemtabTech\TokensValidation\results\BaseResults;
+use HichemtabTech\TokensValidation\Results\BaseResults;
 
 /**
  * Represents a response to a confirmation token request.

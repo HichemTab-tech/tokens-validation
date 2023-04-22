@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Model\authentication;
+namespace HichemtabTech\TokensValidation\Model\Authentication;
 
 use DateTime;
 use Illuminate\Database\Eloquent\Builder;

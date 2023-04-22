@@ -139,7 +139,7 @@ $result = TokensValidation::checkAuthToken(authToken: $authToken);
 To override the cookies handler methods, create a class that extends the **AuthTokenCookiesHandler** class and implements the **save()**, **get()**, and **delete()** methods. Then, set the **$AuthTokenCookiesHandler** property to the name of your new class. Here's an example:
 
 ```PHP
-use HichemtabTech\TokensValidation\Actions\authentication\AuthTokenCookiesHandler;
+use HichemtabTech\TokensValidation\Actions\Authentication\AuthTokenCookiesHandler;
 
 class MyAuthTokenCookiesHandler extends AuthTokenCookiesHandler
 {
@@ -230,9 +230,9 @@ $result = TokensValidation::checkConfirmationUrlParamsFromGET(_GET_ARRAY: $_GET)
 To override the ConfirmationUrl builder methods, create a class that extends the **ConfirmationUrlBuilder** class and implements the **getUrl(ConfirmationToken $confirmationToken, string $baseUrl)**, **getUserIdAndTokenFromUrl(string $url)**, and **getUserIdAndTokenFromGET(array $_GET_ARRAY)** methods. Then, set the $ConfirmationUrlBuilder property to the name of your new class. Here's an example:
 
 ```PHP
-use HichemtabTech\TokensValidation\Actions\confirmation\ConfirmationUrlBuilder;
-use HichemtabTech\TokensValidation\Actions\confirmation\UserIdAndToken;
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationToken;
+use HichemtabTech\TokensValidation\Actions\Confirmation\ConfirmationUrlBuilder;
+use HichemtabTech\TokensValidation\Actions\Confirmation\UserIdAndToken;
+use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationToken;
 use Purl\Url;
 
 class MyConfirmationUrlBuilder extends ConfirmationUrlBuilder
@@ -332,6 +332,43 @@ TokensValidation::setConfirmationTokenExpirationDelay(60 * 60);  // seconds
 
 //these lines should be called after preparation.
 ```
+
+## In Laravel
+
+You can use a configuration file named config/tokensvalidation.php to configure your library with its parameters.
+here's an example of tokensvalidation.php:
+
+```PHP
+ // you can customize the Classes here
+return [
+    'connections' => [
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'database' => 'db',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+        ],
+    ],
+
+    'AuthTokens' => [
+        'expirationDelay' => 60*60*24*7,
+        'AuthTokenGenerator' => MyAuthTokenGenerator::class,
+        'AuthTokenCookiesHandler' => MyAuthTokenCookiesHandler::class,
+    ],
+
+    'ConfirmationToken' => [
+        'expirationDelay' => 60*10,
+        'ConfirmationUrlBuilder' => MyConfirmationUrlBuilder::class,
+        'ConfirmationCodeGenerator' => MyConfirmationCodeGenerator::class,
+        'UserIdEncrypter' => MyUserIdEncrypter::class
+    ]
+];
+```
+
 
 ### Errors identification
 

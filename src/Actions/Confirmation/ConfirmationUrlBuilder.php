@@ -1,8 +1,8 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
-namespace HichemtabTech\TokensValidation\Actions\confirmation;
+namespace HichemtabTech\TokensValidation\Actions\Confirmation;
 
-use HichemtabTech\TokensValidation\Model\confirmation\ConfirmationToken;
+use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationToken;
 use Purl\Url;
 
 /**

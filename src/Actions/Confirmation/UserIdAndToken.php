@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Actions\confirmation;
+namespace HichemtabTech\TokensValidation\Actions\Confirmation;
 
 /**
  * Class UserIdAndToken represents a user ID and token.
