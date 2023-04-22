@@ -369,6 +369,12 @@ return [
 ];
 ```
 
+To prepare or publish your files to a Laravel project, you need to run the following command:
+
+```bash
+php artisan vendor:publish --provider="HichemtabTech\TokensValidation\Laravel\Providers\TokensValidationProvider"
+```
+
 
 ### Errors identification
 
