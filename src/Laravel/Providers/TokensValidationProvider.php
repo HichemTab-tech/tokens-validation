@@ -38,5 +38,8 @@ class TokensValidationProvider extends ServiceProvider
         $configPath = __DIR__.'/../config/tokensvalidation.php';
         $publishPath = config_path('tokensvalidation.php');
         $this->publishes([$configPath => $publishPath], 'config');
+        $providerPath = __DIR__.'/../Providers/TokensValidationProvider.php';
+        $publishPath2 = app_path('Providers/TokensValidationProvider.php');
+        $this->publishes([$providerPath => $publishPath2], 'config');
     }
 }
