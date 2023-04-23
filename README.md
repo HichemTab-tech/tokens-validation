@@ -333,6 +333,14 @@ TokensValidation::setConfirmationTokenExpirationDelay(60 * 60);  // seconds
 //these lines should be called after preparation.
 ```
 
+You have the option to provide a custom expiration delay by passing the "expirationDelay" parameter to the function which generates the token for either the confirmation token or authentication token. You can accomplish this by using the following code:
+```PHP
+$confirmationToken = TokensValidation::createNewConfirmationToken(
+        userId: $uid,
+        expirationDelay: 60*60  // seconds
+    );
+```
+
 ## In Laravel
 
 You can use a configuration file named config/tokensvalidation.php to configure your library with its parameters.

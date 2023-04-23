@@ -277,14 +277,24 @@ class TokensValidation
      * @param string $fingerPrint
      * @param int|null $confirmationType
      * @param string $whatFor
+     * @param float|int $expirationDelay
      * @return AuthToken|ConfirmationToken
      * @throws Exception
      */
-    private static function createNewToken(string $userId, int $type, string $oldToken = null, string $fingerPrint = "", int $confirmationType = null, string $whatFor = "default"): ConfirmationToken|AuthToken
+    private static function createNewToken(string $userId, int $type, string $oldToken = null, string $fingerPrint = "", int $confirmationType = null, string $whatFor = "default", float|int $expirationDelay = -1): ConfirmationToken|AuthToken
     {
         $datetime = new DateTime();
         if ($type == TokensTypes::AUTHENTICATION_BY_TOKEN || $type == TokensTypes::AUTHENTICATION_BY_COOKIE) {
-            $datetime->modify('+'.self::getAuthTokenExpirationDelay().' seconds');
+            if ($expirationDelay == -1) {
+                $delay = self::getAuthTokenExpirationDelay();
+            }
+            elseif ($expirationDelay > 0) {
+                $delay = $expirationDelay;
+            }
+            else{
+                throw new Exception("Expiration delay can't be < 0");
+            }
+            $datetime->modify('+'.$delay.' seconds');
             $authToken = AuthToken::builder()
                 ->withUserId($userId)
                 ->withType($type)
@@ -318,7 +328,16 @@ class TokensValidation
         }
         else{
             if ($confirmationType == null) throw new Exception("confirmationType is null");
-            $datetime->modify('+'.self::getConfirmationTokenExpirationDelay().' seconds');
+            if ($expirationDelay == -1) {
+                $delay = self::getConfirmationTokenExpirationDelay();
+            }
+            elseif ($expirationDelay > 0) {
+                $delay = $expirationDelay;
+            }
+            else{
+                throw new Exception("Expiration delay can't be < 0");
+            }
+            $datetime->modify('+'.$delay.' seconds');
             $encryptedUserId = call_user_func_array([new self::$UserIdEncrypter(), 'encrypt'], [$userId]);
             $token = ConfirmationToken::builder()
                 ->withUserId($encryptedUserId)
@@ -344,26 +363,28 @@ class TokensValidation
      * @param string $userId
      * @param string $fingerPrint
      * @param bool $usingCookies
+     * @param float|int $expirationDelay
      * @return AuthToken
      * @throws Exception
      * @noinspection PhpUnused
      */
-    public static function createNewAuthToken(string $userId, string $fingerPrint = "", bool $usingCookies = false): AuthToken
+    public static function createNewAuthToken(string $userId, string $fingerPrint = "", bool $usingCookies = false, float|int $expirationDelay = -1): AuthToken
     {
-        return self::createNewToken(userId: $userId, type: $usingCookies ? TokensTypes::AUTHENTICATION_BY_COOKIE : TokensTypes::AUTHENTICATION_BY_TOKEN, fingerPrint: $fingerPrint);
+        return self::createNewToken(userId: $userId, type: $usingCookies ? TokensTypes::AUTHENTICATION_BY_COOKIE : TokensTypes::AUTHENTICATION_BY_TOKEN, fingerPrint: $fingerPrint, expirationDelay: $expirationDelay);
     }
 
     /**
      * @param string $userId
      * @param int $confirmationType
      * @param string $whatFor
+     * @param float|int $expirationDelay
      * @return ConfirmationToken
      * @throws Exception
      * @noinspection PhpUnused
      */
-    public static function createNewConfirmationToken(string $userId, int $confirmationType = ConfirmationsTokenTypes::SMALL_CODE, string $whatFor = "default"): ConfirmationToken
+    public static function createNewConfirmationToken(string $userId, int $confirmationType = ConfirmationsTokenTypes::SMALL_CODE, string $whatFor = "default", float|int $expirationDelay = -1): ConfirmationToken
     {
-        return self::createNewToken(userId: $userId, type: TokensTypes::CONFIRMATION_CODE, confirmationType: $confirmationType, whatFor: $whatFor);
+        return self::createNewToken(userId: $userId, type: TokensTypes::CONFIRMATION_CODE, confirmationType: $confirmationType, whatFor: $whatFor, expirationDelay: $expirationDelay);
     }
 
     /**
