@@ -3,7 +3,6 @@
 namespace HichemtabTech\TokensValidation\Laravel\Providers;
 
 use HichemtabTech\TokensValidation\TokensValidation;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 
 class TokensValidationProvider extends ServiceProvider
@@ -12,7 +11,6 @@ class TokensValidationProvider extends ServiceProvider
      * Register services.
      *
      * @return void
-     * @throws BindingResolutionException
      */
     public function register(): void
     {
@@ -20,18 +18,18 @@ class TokensValidationProvider extends ServiceProvider
         $this->app->singleton(TokensValidation::class, function () {
             return TokensValidation::class;
         });
-
-        /*$this->app->make('HichemtabTech\TokensValidation\Laravel\Http\Controllers\InvitationAnswererController')
-            ->loadRoutes();*/
     }
 
     /**
      * Bootstrap services.
      *
      * @return void
+     * @noinspection PhpUndefinedFunctionInspection
      */
     public function boot(): void
     {
+        TokensValidation::setConfig(config('tokensvalidation'));
+        TokensValidation::prepare();
         $this->app->singleton(TokensValidation::class, function () {
             return TokensValidation::class;
         });
