@@ -3,7 +3,6 @@
 namespace HichemtabTech\TokensValidation\Results;
 
 use Exception;
-use HichemtabTech\TokensValidation\BaseResultsBuilder;
 
 /**
  * Class BaseResults

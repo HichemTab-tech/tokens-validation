@@ -2,8 +2,8 @@
 
 namespace HichemtabTech\TokensValidation\Results\Authentication;
 
-use HichemtabTech\TokensValidation\BaseResultsBuilder;
 use HichemtabTech\TokensValidation\Model\Authentication\AuthToken;
+use HichemtabTech\TokensValidation\Results\BaseResultsBuilder;
 
 /**
  * Builds instances of the AuthTokenResponse class.

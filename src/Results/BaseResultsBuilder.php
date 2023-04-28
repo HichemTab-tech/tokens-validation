@@ -1,9 +1,8 @@
 <?php
 
-namespace HichemtabTech\TokensValidation;
+namespace HichemtabTech\TokensValidation\Results;
 
 use Exception;
-use HichemtabTech\TokensValidation\Results\BaseResults;
 
 /**
  * Class BaseResultsBuilder

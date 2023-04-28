@@ -4,6 +4,8 @@ use HichemtabTech\TokensValidation\Actions\Authentication\AuthTokenCookiesHandle
 use HichemtabTech\TokensValidation\Actions\Authentication\AuthTokenGenerator;
 use HichemtabTech\TokensValidation\Actions\Confirmation\ConfirmationCodeGenerator;
 use HichemtabTech\TokensValidation\Actions\Confirmation\ConfirmationUrlBuilder;
+use HichemtabTech\TokensValidation\Actions\Invitation\InvitationTokenGenerator;
+use HichemtabTech\TokensValidation\Actions\Invitation\InvitationUrlBuilder;
 use HichemtabTech\TokensValidation\Actions\UserIdEncrypter;
 
 return [
@@ -31,5 +33,19 @@ return [
         'ConfirmationUrlBuilder' => ConfirmationUrlBuilder::class,
         'ConfirmationCodeGenerator' => ConfirmationCodeGenerator::class,
         'UserIdEncrypter' => UserIdEncrypter::class
+    ],
+
+
+    'InvitationToken' => [
+        'expirationDelay' => 60*60*24*3,
+        'InvitationUrlBuilder' => InvitationUrlBuilder::class,
+        'InvitationTokenGenerator' => InvitationTokenGenerator::class,
+        'InvitationBaseUrl' => "http://localhost/invitations",
+    ],
+
+    'features' => [
+        'AuthTokens',
+        'ConfirmationToken',
+        //'InvitationsTokens'
     ]
 ];

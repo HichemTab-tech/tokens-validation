@@ -1,8 +1,8 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 namespace HichemtabTech\TokensValidation\Results\Confirmation;
 
-use HichemtabTech\TokensValidation\BaseResultsBuilder;
+use HichemtabTech\TokensValidation\Results\BaseResultsBuilder;
 
 /**
  * Class ConfirmationTokenResponseBuilder

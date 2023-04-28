@@ -20,6 +20,7 @@ The TokensValidation library can be installed via Composer by running the follow
 
 - Authenticate the user after the browser closed without password
 - Generate custom confirmation codes with expiration delay.
+- Create invitation tokens to do some actions.
 - Flexibility of usage
 - Security & Encryption
 
@@ -317,6 +318,7 @@ You can modify the behavior of the token and confirmation code generator by crea
 ```PHP
 TokensValidation::$AuthTokenGenerator = MyAuthTokenGenerator::class;
 TokensValidation::$ConfirmationCodeGenerator = MyConfirmationCodeGenerator::class;
+TokensValidation::$InvitationTokenGenerator = MyInvitationTokenGenerator::class;
 ```
 
 ### Token expiration
@@ -340,6 +342,123 @@ $confirmationToken = TokensValidation::createNewConfirmationToken(
         expirationDelay: 60*60  // seconds
     );
 ```
+
+### Invitations
+
+The library offers a feature to create an invitation with a token, which can be sent to users via email to authorize them to perform certain actions, such as joining a project or becoming an admin.
+In order to utilize this functionality, it is necessary to enable the feature prior to calling the prepare() method. By default, the library includes two enabled features, namely AuthToken and ConfirmationToken. To activate additional features, you should call this before **prepare()**:
+
+```PHP
+...
+TokensValidation::setFeatures([
+    'AuthTokens',
+    'ConfirmationToken',
+    'InvitationsTokens'
+]);
+...
+TokensValidation::prepare();
+```
+
+Or using config file:
+
+```PHP
+<?php
+
+
+return [
+    ...
+
+    'features' => [
+        'AuthTokens',
+        'ConfirmationToken',
+        'InvitationsTokens'
+    ]
+    ...
+];
+```
+
+#### Create the invitation:
+
+you can create an invitation by calling this code:
+
+```PHP
+$invitation = TokensValidation::createInvitation(
+        userId: $uid,
+        target_email: "user@example.com",
+        whatFor: "become-admin",
+    );
+
+echo $invitation->getUrl();
+
+```
+
+To adjust the default parameters of the invitation feature in the library, you will need to modify the configuration settings or by calling this code:
+
+```PHP
+TokensValidation::setInvitationTokenExpirationDelay(60*60*24);
+TokensValidation::$InvitationBaseUrl = "http://localhost/invitations";
+TokensValidation::$InvitationTokenGenerator = MyInvitationTokenGenerator::class;
+TokensValidation::$InvitationUrlBuilder = MyInvitationUrlBuilder::class;
+```
+
+#### Check the invitation:
+
+Typically, when using the invitation feature for actions such as sign up, the user is required to provide some information. In order to facilitate this process, the library allows for checking of the invitation, which enables the user to access the input page for providing the required information.
+
+```PHP
+
+<?php
+
+$invitation = TokensValidation::checkInvitationToken(
+    token: $_GET['token'],
+    whatFor: "administration",
+);
+
+if (!$invitation->isValidationSucceed()) {
+    redirectTo("/errors/invalid-invitation.html");
+}
+
+?>
+
+<form method="post" action="">
+    <input type="text" name="fname">
+    <input type="text" name="lname">
+    <input type="email" name="email" readonly value="<?php echo $invitation->getTargetEmail() ?>">
+    <button>submit</button>
+</form>
+
+```
+
+After the user inputs the required information and submits the form, the token needs to be checked once again. Once the token is verified, it is possible to delete the invitation or mark it as "**accepted**". Here is an example of how this can be achieved:
+
+```PHP
+...
+
+//verify the data entered by the user.
+
+...
+
+$invitation = TokensValidation::checkInvitationToken(
+    token: $_GET['token'],
+    whatFor: "administration",
+    thenAccept: true
+);
+
+if (!$invitation->isValidationSucceed()) {
+    die("INVITATION_INVALID");
+}
+
+...
+
+//insert the data entered by the user.
+//performe some actions
+
+echo "invitation accepted";
+
+...
+
+```
+The **thenAccept** parameter in the method is utilized to mark the invitation as "accepted" after the token has been checked and verified. This ensures that the invitation is no longer active and cannot be used again in the future.
 
 ## In Laravel
 
@@ -373,6 +492,19 @@ return [
         'ConfirmationUrlBuilder' => MyConfirmationUrlBuilder::class,
         'ConfirmationCodeGenerator' => MyConfirmationCodeGenerator::class,
         'UserIdEncrypter' => MyUserIdEncrypter::class
+    ],
+
+    'InvitationToken' => [
+        'expirationDelay' => 60*60*24*3,
+        'InvitationUrlBuilder' => InvitationUrlBuilder::class,
+        'InvitationTokenGenerator' => InvitationTokenGenerator::class,
+        'InvitationBaseUrl' => "http://localhost/invitations",
+    ],
+
+    'features' => [
+        'AuthTokens',
+        'ConfirmationToken',
+        //'InvitationsTokens'
     ]
 ];
 ```

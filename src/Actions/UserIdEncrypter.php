@@ -1,4 +1,6 @@
-<?php /** @noinspection SpellCheckingInspection */
+<?php /** @noinspection PhpUnused */
+
+/** @noinspection SpellCheckingInspection */
 
 namespace HichemtabTech\TokensValidation\Actions;
 

@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 namespace HichemtabTech\TokensValidation\Model\Confirmation;
 
@@ -111,7 +111,12 @@ class ConfirmationToken
         return $this->whatFor;
     }
 
-    public function getUrl(string $baseUrl) {
+    /**
+     * @param string $baseUrl
+     * @return string
+     */
+    public function getUrl(string $baseUrl): string
+    {
         return call_user_func_array([new TokensValidation::$ConfirmationUrlBuilder(), 'getUrl'], [$this, $baseUrl]);
     }
 }
