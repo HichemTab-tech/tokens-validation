@@ -29,7 +29,13 @@
             ],
             "config": {
                 "tokensvalidation": "HichemtabTech\\TokensValidation\\Laravel\\config\\tokensvalidation.php"
-            }
+            },
+            "controllers": [
+                {
+                    "name": "InvitationAnswererController",
+                    "path": "src/Laravel/Http/Controllers/InvitationAnswererController.php"
+                }
+            ]
         }
     }
 }

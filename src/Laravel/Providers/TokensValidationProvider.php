@@ -3,6 +3,7 @@
 namespace HichemtabTech\TokensValidation\Laravel\Providers;
 
 use HichemtabTech\TokensValidation\TokensValidation;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 
 class TokensValidationProvider extends ServiceProvider
@@ -11,6 +12,7 @@ class TokensValidationProvider extends ServiceProvider
      * Register services.
      *
      * @return void
+     * @throws BindingResolutionException
      */
     public function register(): void
     {
