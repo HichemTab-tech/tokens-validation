@@ -7,7 +7,7 @@ namespace HichemtabTech\TokensValidation\Laravel\Http\Controllers;
 use HichemtabTech\TokensValidation\TokensValidation;
 use Illuminate\Http\Request;
 
-class InvitationAnswererController extends Controller
+class InvitationAnswererController
 {
     /** @noinspection PhpUndefinedFunctionInspection
      * @noinspection PhpInconsistentReturnPointsInspection
