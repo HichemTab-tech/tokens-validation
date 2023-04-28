@@ -21,8 +21,8 @@ class TokensValidationProvider extends ServiceProvider
             return TokensValidation::class;
         });
 
-        $this->app->make('HichemtabTech\TokensValidation\Laravel\Http\Controllers\InvitationAnswererController')
-            ->loadRoutes();
+        /*$this->app->make('HichemtabTech\TokensValidation\Laravel\Http\Controllers\InvitationAnswererController')
+            ->loadRoutes();*/
     }
 
     /**
