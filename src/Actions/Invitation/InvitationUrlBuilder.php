@@ -3,6 +3,7 @@
 namespace HichemtabTech\TokensValidation\Actions\Invitation;
 
 use HichemtabTech\TokensValidation\Model\Invitation\Invitation;
+use Illuminate\Http\Request;
 use Purl\Url;
 
 class InvitationUrlBuilder
@@ -36,5 +37,14 @@ class InvitationUrlBuilder
     public function getTokenFromGET(array $_GET_ARRAY): string
     {
         return $_GET_ARRAY["c"]??"";
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function getTokenFromRequest(Request $request): string
+    {
+        return $this->getTokenFromUrl($request->getRequestUri());
     }
 }

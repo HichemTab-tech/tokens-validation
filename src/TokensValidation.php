@@ -24,6 +24,7 @@ use HichemtabTech\TokensValidation\Results\Confirmation\ConfirmationTokenRespons
 use HichemtabTech\TokensValidation\Results\Invitation\InvitationResponse;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Http\Request;
 
 /**
  *
@@ -810,5 +811,16 @@ class TokensValidation
     public static function checkInvitationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default", bool $thenAccept = false): InvitationResponse
     {
         return self::checkInvitationToken(call_user_func_array([new TokensValidation::$InvitationUrlBuilder(), 'getTokenFromGET'], [$_GET_ARRAY]), $whatFor, $thenAccept);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $whatFor
+     * @param bool $thenAccept
+     * @return InvitationResponse
+     */
+    public static function checkInvitationRequest(Request $request, string $whatFor = "default", bool $thenAccept = false): InvitationResponse
+    {
+        return self::checkInvitationToken(call_user_func_array([new TokensValidation::$InvitationUrlBuilder(), 'getTokenFromRequest'], [$request]), $whatFor, $thenAccept);
     }
 }
