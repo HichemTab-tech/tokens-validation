@@ -4,7 +4,6 @@ namespace HichemtabTech\TokensValidation\Actions\Invitation;
 
 use HichemtabTech\TokensValidation\Model\Invitation\Invitation;
 use Illuminate\Http\Request;
-use Purl\Url;
 
 class InvitationUrlBuilder
 {
@@ -15,9 +14,12 @@ class InvitationUrlBuilder
      */
     public function getUrl(Invitation $invitation, string $baseUrl): string
     {
-        $url = new Url($baseUrl);
-        $url->query->set("c", $invitation->getContent());// for Code
-        return $url->getUrl();
+        $p = parse_url($baseUrl);
+        parse_str($p['query']??"", $r);
+        $r['c'] = $invitation->getContent();
+        $q = http_build_query($r);
+        return $p['scheme'] . '://' . $p['host'] . $p['path']
+            . (!empty($q) ? '?' . $q : '');
     }
 
     /**
@@ -26,8 +28,9 @@ class InvitationUrlBuilder
      */
     public function getTokenFromUrl(string $url): string
     {
-        $url = new Url($url);
-        return $url->query->get("c");
+        $p = parse_url($url);
+        parse_str($p['query']??"", $r);
+        return $r['c']??"";
     }
 
     /**

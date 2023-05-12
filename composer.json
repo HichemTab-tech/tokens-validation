@@ -19,7 +19,6 @@
         "illuminate/database": "^9.52",
         "illuminate/events": "^9.52",
         "illuminate/container": "^9.52",
-        "jwage/purl": "^0.0.9",
         "defuse/php-encryption": "^2.3",
         "illuminate/http": "^9.52"
     },

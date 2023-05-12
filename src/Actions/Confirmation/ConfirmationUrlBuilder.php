@@ -3,7 +3,6 @@
 namespace HichemtabTech\TokensValidation\Actions\Confirmation;
 
 use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationToken;
-use Purl\Url;
 
 /**
  *
@@ -30,10 +29,13 @@ class ConfirmationUrlBuilder
      */
     public function getUrl(ConfirmationToken $confirmationToken, string $baseUrl): string
     {
-        $url = new Url($baseUrl);
-        $url->query->set("u", $confirmationToken->getUserId());// for userId
-        $url->query->set("c", $confirmationToken->getContent());// for Code
-        return $url->getUrl();
+        $p = parse_url($baseUrl);
+        parse_str($p['query']??"", $r);
+        $r['u'] = $confirmationToken->getUserId();
+        $r['c'] = $confirmationToken->getContent();
+        $q = http_build_query($r);
+        return $p['scheme'] . '://' . $p['host'] . $p['path']
+            . (!empty($q) ? '?' . $q : '');
     }
 
     /**
@@ -42,10 +44,11 @@ class ConfirmationUrlBuilder
      */
     public function getUserIdAndTokenFromUrl(string $url): UserIdAndToken
     {
-        $url = new Url($url);
+        $p = parse_url($url);
+        parse_str($p['query']??"", $r);
         return UserIdAndToken::builder()
-            ->setUserId($url->query->get("u"))
-            ->setToken($url->query->get("c"))
+            ->setUserId($r["u"]??"")
+            ->setToken($r["c"]??"")
             ->build();
     }
 
