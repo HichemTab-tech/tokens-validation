@@ -13,7 +13,7 @@ class CreateCustomHandler extends Command
      *
      * @var string
      */
-    protected $signature = 'tokensvalidation:handler';
+    protected $signature = 'tokens-validation:handler';
 
     /**
      * The console command description.
