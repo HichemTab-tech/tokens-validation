@@ -303,6 +303,22 @@ $confirmationToken = TokensValidation::createNewConfirmationToken(
     );
 ```
 
+#### Single Token Per Period:
+To avoid creating multiple confirmation code at the same moment (before expiration),
+you can set "**singleTokenPerTime**" parameter to true when calling the **createNewConfirmationToken** function.
+This parameter allows TokensValidation to create only one confirmation code per time,
+and in case the user requests another code with the same purpose (same whatFor value)
+the library returns the existed token only with different expiration date.
+
+```PHP
+$confirmationToken = TokensValidation::createNewConfirmationToken(
+        userId: $uid,
+        confirmationType: ConfirmationsTokenTypes::SMALL_CODE,
+        whatFor: "email-confirmation",
+        singleTokenPerTime: true
+    );
+```
+
 
 To check it :
 ```PHP
