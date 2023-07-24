@@ -6,6 +6,28 @@
 
 TokensValidation is a PHP library designed to generate and verify authentication and confirmation tokens dynamically. It is ideal for web applications and software that require secure user authentication and authorization. The library generates authentication and confirmation tokens that can be used to log in users, reset passwords, and confirm email addresses.
 
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Features](#features)
+3. [Usage](#usage)
+   1. [Authentication Tokens](#authentication-tokens)
+      1. [Using Cookies](#1-using-cookies)
+      2. [Handling the Token Yourself](#2-handling-the-token-yourself)
+      3. [Overriding the Cookie Handler Methods](#3-overriding-the-cookie-handler-methods)
+   2. [Fingerprint](#fingerprint)
+   3. [Confirmation Tokens](#confirmation-tokens)
+      1. [By URL](#1--by-url)
+      2. [By Typing](#2--by-typing)
+      3. [WhatFor Field](#whatfor-field)
+      4. [Single Token Per Period](#single-token-per-period)
+   4. [Tokens Generator](#tokens-generator)
+   5. [Token Expiration](#token-expiration)
+   6. [Invitations](#invitations)
+   7. [In Laravel](#in-laravel)
+   8. [Errors Identification](#errors-identification)
+4. [License](#license)
+5. 
 
 ## Installation
 
