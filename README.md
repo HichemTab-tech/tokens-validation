@@ -303,6 +303,14 @@ $confirmationToken = TokensValidation::createNewConfirmationToken(
     );
 ```
 
+
+To check it :
+```PHP
+$result = TokensValidation::checkConfirmationCode(code: $token, whatFor: "email-confirmation");
+```
+
+If the "whatFor" parameter does not match the intended purpose of the confirmation code, the validation process will fail.
+
 #### Single Token Per Period:
 To avoid creating multiple confirmation code at the same moment (before expiration),
 you can set "**singleTokenPerTime**" parameter to true when calling the **createNewConfirmationToken** function.
@@ -318,14 +326,6 @@ $confirmationToken = TokensValidation::createNewConfirmationToken(
         singleTokenPerTime: true
     );
 ```
-
-
-To check it :
-```PHP
-$result = TokensValidation::checkConfirmationCode(code: $token, whatFor: "email-confirmation");
-```
-
-If the "whatFor" parameter does not match the intended purpose of the confirmation code, the validation process will fail.
 
 ### Tokens generator
 
