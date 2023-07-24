@@ -27,7 +27,7 @@ TokensValidation is a PHP library designed to generate and verify authentication
    7. [In Laravel](#in-laravel)
    8. [Errors Identification](#errors-identification)
 4. [License](#license)
-5. 
+
 
 ## Installation
 
