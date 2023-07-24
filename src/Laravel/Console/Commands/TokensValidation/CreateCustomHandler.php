@@ -1,6 +1,6 @@
 <?php
 
-namespace HichemtabTech\TokensValidation\Laravel\Console\TokensValidation;
+namespace HichemtabTech\TokensValidation\Laravel\Console\Commands\TokensValidation;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
