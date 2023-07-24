@@ -1,6 +1,6 @@
-<?php
+<?php /** @noinspection PhpIllegalPsrClassPathInspection */
 
-namespace HichemtabTech\TokensValidation\Laravel\Console\Commands\TokensValidation;
+namespace App\Console\Commands\TokensValidation;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
