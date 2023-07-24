@@ -557,7 +557,7 @@ In Laravel project you can generate class to override the default classes of Tok
 (ConfirmationUrlBuilder, AuthTokenCookiesHandler...) by running the following command:
 
 ```bash
-php artisan tokensvalidation:handler
+php artisan tokens-validation:handler
 ```
 
 after that, choose what class you want to generate and follow the instruction shown in the console.
