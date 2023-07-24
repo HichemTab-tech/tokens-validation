@@ -47,5 +47,8 @@ class TokensValidationProvider extends ServiceProvider
         $controllerPath = __DIR__.'/../Http/Controllers/InvitationAnswererController.php';
         $publishPath3 = app_path('Http/Controllers/InvitationAnswererController.php');
         $this->publishes([$controllerPath => $publishPath3], 'controllers');
+        $consolePath = __DIR__.'/../Console';
+        $publishPath4 = app_path('Console');
+        $this->publishes([$consolePath => $publishPath4], 'hichemtab-tech-tokensvalidation');
     }
 }

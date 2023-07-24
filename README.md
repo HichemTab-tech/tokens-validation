@@ -18,7 +18,7 @@ The TokensValidation library can be installed via Composer by running the follow
 
 ## Features
 
-- Authenticate the user after the browser closed without password
+- Authenticate the user after the browser closed without a password
 - Generate custom confirmation codes with expiration delay.
 - Create invitation tokens to do some actions.
 - Flexibility of usage
@@ -90,7 +90,7 @@ $result = TokensValidation::checkAuthToken();
 
 **TokensValidation::checkAuthToken()** checks the authentication token in the cookie and returns the result. If the validation is successful, a new token is generated and replaced in the cookie.
 
-##### check the token without regenerate a new one:
+##### check the token without regenerating a new one:
 
 ```PHP
 $result = TokensValidation::checkAuthTokenWithoutRegenerate();
@@ -122,7 +122,7 @@ To check the authentication token, call the following method and pass the token 
 ```PHP
 $result = TokensValidation::checkAuthToken(authToken: $authToken);
     if ($result->isValidationSucceed()) {
-        // log in the user automatically
+        // log in the user automatically,
         //for example :
         echo $result->getUserId();
         echo $result->getNewToken()->getContent();// save it in cookies or whatever you want
@@ -182,7 +182,7 @@ To check the authentication token with a fingerprint, call the **checkAuthToken(
 $result = TokensValidation::checkAuthToken(authToken: $authToken, fingerPrint: $somefingerprint);
 ```
 
-- *to generate the fingerprint you can use for example https://github.com/Valve/fingerprintjs2*
+- *to generate the fingerprint, you can use for example https://github.com/Valve/fingerprintjs2*
 
 
 
@@ -463,7 +463,7 @@ The **thenAccept** parameter in the method is utilized to mark the invitation as
 ## In Laravel
 
 You can use a configuration file named config/tokensvalidation.php to configure your library with its parameters.
-here's an example of tokensvalidation.php:
+Here's an example of tokensvalidation.php:
 
 ```PHP
  // you can customize the Classes here
@@ -515,10 +515,20 @@ To prepare or publish your files to a Laravel project, you need to run the follo
 php artisan vendor:publish --provider="HichemtabTech\TokensValidation\Laravel\Providers\TokensValidationProvider"
 ```
 
+In Laravel project you can generate class to override the default classes of TokensValidation
+(ConfirmationUrlBuilder, AuthTokenCookiesHandler...) by running the following command:
+
+```bash
+php artisan tokensvalidation:handler
+```
+
+after that, choose what class you want to generate and follow the instruction shown in the console.
 
 ### Errors identification
 
-To identify and troubleshoot errors that may occur, you can utilize the **$result->getCause()** function, which returns a reference code to indicate the specific cause of the error. Several possible error codes may be returned by this function.
+To identify and troubleshoot errors that may occur, you can utilize the **$result->getCause()** function,
+which returns a reference code to indicate the specific cause of the error.
+This function may return several possible error codes.
 ## Error Reference
 
 | Error                 | Cause                                                                                                                    |

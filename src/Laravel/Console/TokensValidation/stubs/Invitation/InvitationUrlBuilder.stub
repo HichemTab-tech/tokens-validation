@@ -1,0 +1,54 @@
+<?php /** @noinspection PhpUnused */
+
+namespace App\Actions\TokensValidation\Invitation;
+
+use HichemtabTech\TokensValidation\Actions\Invitation\InvitationUrlBuilder as DefaultInvitationUrlBuilder;
+use HichemtabTech\TokensValidation\Model\Invitation\Invitation;
+use Illuminate\Http\Request;
+
+class InvitationUrlBuilder extends DefaultInvitationUrlBuilder
+{
+    /**
+     * @param Invitation $invitation
+     * @param string $baseUrl
+     * @return string
+     */
+    public function getUrl(Invitation $invitation, string $baseUrl): string
+    {
+        $p = parse_url($baseUrl);
+        parse_str($p['query']??"", $r);
+        $r['c'] = $invitation->getContent();
+        $q = http_build_query($r);
+        return $p['scheme'] . '://' . $p['host'] . $p['path']
+            . (!empty($q) ? '?' . $q : '');
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    public function getTokenFromUrl(string $url): string
+    {
+        $p = parse_url($url);
+        parse_str($p['query']??"", $r);
+        return $r['c']??"";
+    }
+
+    /**
+     * @param array $_GET_ARRAY
+     * @return string
+     */
+    public function getTokenFromGET(array $_GET_ARRAY): string
+    {
+        return $_GET_ARRAY["c"]??"";
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function getTokenFromRequest(Request $request): string
+    {
+        return $this->getTokenFromUrl($request->getRequestUri());
+    }
+}

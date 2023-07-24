@@ -370,10 +370,11 @@ class TokensValidation
      * @param int|null $confirmationType
      * @param string $whatFor
      * @param float|int $expirationDelay
+     * @param bool|null $singleTokenPerTime
      * @return AuthToken|ConfirmationToken
      * @throws Exception
      */
-    private static function createNewToken(string $userId, int $type, string $oldToken = null, string $fingerPrint = "", int $confirmationType = null, string $whatFor = "default", float|int $expirationDelay = -1): ConfirmationToken|AuthToken
+    private static function createNewToken(string $userId, int $type, string $oldToken = null, string $fingerPrint = "", int $confirmationType = null, string $whatFor = "default", float|int $expirationDelay = -1, bool|null $singleTokenPerTime = null): ConfirmationToken|AuthToken
     {
         $datetime = new DateTime();
         if ($type == TokensTypes::AUTHENTICATION_BY_TOKEN || $type == TokensTypes::AUTHENTICATION_BY_COOKIE) {
@@ -429,6 +430,7 @@ class TokensValidation
             else{
                 throw new Exception("Expiration delay can't be < 0");
             }
+            if ($singleTokenPerTime == null) $singleTokenPerTime = self::$config['ConfirmationToken']['singleTokenPerTime'];
             $datetime->modify('+'.$delay.' seconds');
             $encryptedUserId = call_user_func_array([new self::$UserIdEncrypter(), 'encrypt'], [$userId]);
             $token = ConfirmationToken::builder()
@@ -438,9 +440,22 @@ class TokensValidation
                 ->withExpiredAt($datetime)
                 ->withWhatFor($whatFor)
                 ->build();
+            if ($singleTokenPerTime) {
+                $oldToken = ConfirmationTokenModel::where('userId', $userId)
+                    ->where('whatFor', $whatFor)
+                    ->where('type', $confirmationType)
+                    ->where('expire_at', '>', date('Y-m-d H:i:s'))
+                    ->get();
+                if ($oldToken != null AND count($oldToken) != 0) {
+                    $oldContent = $oldToken->last()->content;
+                    $oldToken->each(function ($token) {
+                        $token->delete();
+                    });
+                }
+            }
             ConfirmationTokenModel::create([
                 'userId' => $userId,
-                'content' => $token->getContent(),
+                'content' => $oldContent??$token->getContent(),
                 'type' => $token->getType(),
                 'expire_at' => $token->getExpiredAt(),
                 'whatFor' => $whatFor
@@ -469,12 +484,20 @@ class TokensValidation
      * @param int $confirmationType
      * @param string $whatFor
      * @param float|int $expirationDelay
+     * @param bool|null $singleTokenPerTime
      * @return ConfirmationToken
      * @throws Exception
      */
-    public static function createNewConfirmationToken(string $userId, int $confirmationType = ConfirmationsTokenTypes::SMALL_CODE, string $whatFor = "default", float|int $expirationDelay = -1): ConfirmationToken
+    public static function createNewConfirmationToken(string $userId, int $confirmationType = ConfirmationsTokenTypes::SMALL_CODE, string $whatFor = "default", float|int $expirationDelay = -1, bool|null $singleTokenPerTime = null): ConfirmationToken
     {
-        return self::createNewToken(userId: $userId, type: TokensTypes::CONFIRMATION_CODE, confirmationType: $confirmationType, whatFor: $whatFor, expirationDelay: $expirationDelay);
+        return self::createNewToken(
+            userId: $userId,
+            type: TokensTypes::CONFIRMATION_CODE,
+            confirmationType: $confirmationType,
+            whatFor: $whatFor,
+            expirationDelay: $expirationDelay,
+            singleTokenPerTime: $singleTokenPerTime
+        );
     }
 
     /**

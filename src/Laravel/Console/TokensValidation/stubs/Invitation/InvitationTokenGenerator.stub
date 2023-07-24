@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Actions\TokensValidation\Invitation;
+
+use HichemtabTech\TokensValidation\Actions\Invitation\InvitationTokenGenerator as DefaultInvitationTokenGenerator;
+use HichemtabTech\TokensValidation\TokensValidation;
+
+class InvitationTokenGenerator extends DefaultInvitationTokenGenerator
+{
+    /**
+     * @return string
+     */
+    public function generate(): string
+    {
+        //TO*DO: generate a unique token
+        return TokensValidation::generateAlphaNumKey(25);
+    }
+}

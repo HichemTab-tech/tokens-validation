@@ -32,7 +32,8 @@ return [
         'expirationDelay' => 60*10,
         'ConfirmationUrlBuilder' => ConfirmationUrlBuilder::class,
         'ConfirmationCodeGenerator' => ConfirmationCodeGenerator::class,
-        'UserIdEncrypter' => UserIdEncrypter::class
+        'UserIdEncrypter' => UserIdEncrypter::class,
+        'singleTokenPerTime' => false,
     ],
 
 
