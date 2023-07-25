@@ -4,6 +4,7 @@ namespace App\Actions\TokensValidation\Confirmation;
 
 use HichemtabTech\TokensValidation\Actions\Confirmation\ConfirmationUrlBuilder as DefaultConfirmationUrlBuilder;
 use HichemtabTech\TokensValidation\Model\Confirmation\ConfirmationToken;
+use HichemtabTech\TokensValidation\Actions\Confirmation\UserIdAndToken;
 
 /**
  *
@@ -21,6 +22,7 @@ class ConfirmationUrlBuilder extends DefaultConfirmationUrlBuilder
 
     public function __construct()
     {
+        parent::__construct();
     }
 
     /**

@@ -71,6 +71,8 @@ class CreateCustomHandler extends Command
         $choice = trim($parts[1]);
 
         $name = $this->ask('name of the class ?', $choice);
+        if ($name == 'My...') $name = 'My'.$choice;
+        if ($name == 'Custom...') $name = 'Custom'.$choice;
         $stub = File::get(__DIR__."/stubs/$head/$choice.stub");
         $stub = str_replace("//TO*DO", "//TODO", $stub);
         $stub = str_replace("class $choice extends", "class $name extends", $stub);
