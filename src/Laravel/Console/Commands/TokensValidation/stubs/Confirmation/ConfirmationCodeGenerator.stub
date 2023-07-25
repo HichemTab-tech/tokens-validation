@@ -9,7 +9,7 @@ use HichemtabTech\TokensValidation\TokensValidation;
 /**
  *
  */
-class ConfirmationCodeGenerator extends DefaultConfirmationCodeGenerator
+class {{className}} extends DefaultConfirmationCodeGenerator
 {
 
 

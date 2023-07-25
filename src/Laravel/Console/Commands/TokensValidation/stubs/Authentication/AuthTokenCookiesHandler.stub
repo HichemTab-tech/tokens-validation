@@ -9,7 +9,7 @@ use HichemtabTech\TokensValidation\TokensValidation;
 /**
  *
  */
-class AuthTokenCookiesHandler extends DefaultAuthTokenCookiesHandler
+class {{className}} extends DefaultAuthTokenCookiesHandler
 {
     /**
      * @param AuthToken $authToken

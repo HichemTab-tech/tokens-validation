@@ -6,7 +6,7 @@ use HichemtabTech\TokensValidation\Actions\Invitation\InvitationUrlBuilder as De
 use HichemtabTech\TokensValidation\Model\Invitation\Invitation;
 use Illuminate\Http\Request;
 
-class InvitationUrlBuilder extends DefaultInvitationUrlBuilder
+class {{className}} extends DefaultInvitationUrlBuilder
 {
     /**
      * @param Invitation $invitation

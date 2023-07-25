@@ -9,7 +9,7 @@ use HichemtabTech\TokensValidation\Actions\UserIdEncrypter as DefaultUserIdEncry
 /**
  *
  */
-class UserIdEncrypter extends DefaultUserIdEncrypter
+class {{className}} extends DefaultUserIdEncrypter
 {
     /**
      * @param $userId

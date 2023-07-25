@@ -5,7 +5,7 @@ namespace App\Actions\TokensValidation\Invitation;
 use HichemtabTech\TokensValidation\Actions\Invitation\InvitationTokenGenerator as DefaultInvitationTokenGenerator;
 use HichemtabTech\TokensValidation\TokensValidation;
 
-class InvitationTokenGenerator extends DefaultInvitationTokenGenerator
+class {{className}} extends DefaultInvitationTokenGenerator
 {
     /**
      * @return string

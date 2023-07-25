@@ -9,15 +9,15 @@ use HichemtabTech\TokensValidation\Actions\Confirmation\UserIdAndToken;
 /**
  *
  */
-class ConfirmationUrlBuilder extends DefaultConfirmationUrlBuilder
+class {{className}} extends DefaultConfirmationUrlBuilder
 {
 
     /**
-     * @return ConfirmationUrlBuilder
+     * @return {{className}}
      */
-    public static function instance(): ConfirmationUrlBuilder
+    public static function instance(): {{className}}
     {
-        return new ConfirmationUrlBuilder();
+        return new {{className}}();
     }
 
     public function __construct()

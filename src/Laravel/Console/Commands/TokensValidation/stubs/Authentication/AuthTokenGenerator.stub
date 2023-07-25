@@ -5,7 +5,7 @@ namespace App\Actions\TokensValidation\Authentication;
 use HichemtabTech\TokensValidation\Actions\Authentication\AuthTokenGenerator as DefaultAuthTokenGenerator;
 use HichemtabTech\TokensValidation\TokensValidation;
 
-class AuthTokenGenerator extends DefaultAuthTokenGenerator
+class {{className}} extends DefaultAuthTokenGenerator
 {
     /**
      * @param string $userId
