@@ -612,9 +612,10 @@ class TokensValidation
      * @param string $code
      * @param string|null $encryptedUserId
      * @param string $whatFor
+     * @param bool $deleteAfterCheck
      * @return ConfirmationTokenResponse
      */
-    public static function checkConfirmationCode(string $code, string $encryptedUserId = null, string $whatFor = "default"): ConfirmationTokenResponse
+    public static function checkConfirmationCode(string $code, string $encryptedUserId = null, string $whatFor = "default", bool $deleteAfterCheck = true): ConfirmationTokenResponse
     {
         $confirmationTokenResultsBuilder = ConfirmationTokenResponse::builder()
             ->setValidationSucceed(false);
@@ -638,7 +639,9 @@ class TokensValidation
                     if ($confirmationTokenModel->whatFor == $whatFor || $whatFor == "default") {
                         $confirmationTokenResultsBuilder->setValidationSucceed(true);
                         $confirmationTokenResultsBuilder->withWhatFor($whatFor);
-                        ConfirmationTokenModel::find($confirmationTokenModel->id)->delete();
+                        if ($deleteAfterCheck) {
+                            ConfirmationTokenModel::find($confirmationTokenModel->id)->delete();
+                        }
                         return $confirmationTokenResultsBuilder->build();
                     }
                     else{
@@ -663,14 +666,15 @@ class TokensValidation
     /**
      * @param string $url
      * @param string $whatFor
+     * @param bool $deleteAfterCheck
      * @return ConfirmationTokenResponse
      */
-    public static function checkConfirmationUrl(string $url, string $whatFor = "default"): ConfirmationTokenResponse
+    public static function checkConfirmationUrl(string $url, string $whatFor = "default", bool $deleteAfterCheck = true): ConfirmationTokenResponse
     {
         /** @var UserIdAndToken $userIdAndToken */
         $userIdAndToken = call_user_func_array([new TokensValidation::$ConfirmationUrlBuilder(), 'getUserIdAndTokenFromUrl'], [$url]);
         if ($userIdAndToken != null) {
-            return self::checkConfirmationCode($userIdAndToken->getToken(), $userIdAndToken->getUserId(), $whatFor);
+            return self::checkConfirmationCode($userIdAndToken->getToken(), $userIdAndToken->getUserId(), $whatFor, $deleteAfterCheck);
         }
         return ConfirmationTokenResponse::builder()
             ->setException(new Exception("can't get userIdAndToken"))
@@ -682,14 +686,15 @@ class TokensValidation
     /**
      * @param array $_GET_ARRAY
      * @param string $whatFor
+     * @param bool $deleteAfterCheck
      * @return ConfirmationTokenResponse
      */
-    public static function checkConfirmationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default"): ConfirmationTokenResponse
+    public static function checkConfirmationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default", bool $deleteAfterCheck = true): ConfirmationTokenResponse
     {
         /** @var UserIdAndToken $userIdAndToken */
         $userIdAndToken = call_user_func_array([new TokensValidation::$ConfirmationUrlBuilder(), 'getUserIdAndTokenFromGET'], [$_GET_ARRAY]);
         if ($userIdAndToken != null) {
-            return self::checkConfirmationCode($userIdAndToken->getToken(), $userIdAndToken->getUserId(), $whatFor);
+            return self::checkConfirmationCode($userIdAndToken->getToken(), $userIdAndToken->getUserId(), $whatFor, $deleteAfterCheck);
         }
         return ConfirmationTokenResponse::builder()
             ->setException(new Exception("can't get userIdAndToken"))

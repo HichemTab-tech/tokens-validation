@@ -20,7 +20,8 @@ TokensValidation is a PHP library designed to generate and verify authentication
       1. [By URL](#1--by-url)
       2. [By Typing](#2--by-typing)
       3. [WhatFor Field](#whatfor-field)
-      4. [Single Token Per Period](#single-token-per-period)
+      4. [Delete after check](#delete-after-check)
+      5. [Single Token Per Period](#single-token-per-period)
    4. [Tokens Generator](#tokens-generator)
    5. [Token Expiration](#token-expiration)
    6. [Invitations](#invitations)
@@ -332,6 +333,20 @@ $result = TokensValidation::checkConfirmationCode(code: $token, whatFor: "email-
 ```
 
 If the "whatFor" parameter does not match the intended purpose of the confirmation code, the validation process will fail.
+
+#### Delete after check:
+In some cases, you may only want to check the token and keep it active like for examples (middleware checks)
+you want just to check the token if its valid, then check it later in another position.
+This parameter allows you to specify whether the token will be deleted after the validation succeeded or not.
+
+```PHP
+$confirmationToken = TokensValidation::createNewConfirmationToken(
+        userId: $uid,
+        confirmationType: ConfirmationsTokenTypes::SMALL_CODE,
+        whatFor: "email-confirmation",
+        deleteAfterCheck: false, //true by default
+    );
+```
 
 #### Single Token Per Period:
 To avoid creating multiple confirmation code at the same moment (before expiration),
