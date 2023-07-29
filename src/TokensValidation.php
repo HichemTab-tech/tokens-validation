@@ -543,9 +543,9 @@ class TokensValidation
                 $authTokenModel = $authTokenModel[0];
                 $authTokenResultBuilder->setUserId($authTokenModel->userId);
                 if (!self::isExpired(DateTime::createFromFormat('Y-m-d H:i:s', $authTokenModel->expire_at))) {
-
                     if ($authTokenModel->fingerprint == '' || $authTokenModel->fingerprint == $fingerPrint) {
                         $authTokenResultBuilder->setValidationSucceed(true);
+                        $authTokenResultBuilder->setTokenId(strval($authTokenModel->id??""));
                         if ($regenerate) {
                             $newToken = self::regenerateAuthToken($authTokenModel->userId, $token, $authTokenModel->type);
                             $authTokenResultBuilder->setNewToken($newToken);
@@ -639,6 +639,7 @@ class TokensValidation
                     if ($confirmationTokenModel->whatFor == $whatFor || $whatFor == "default") {
                         $confirmationTokenResultsBuilder->setValidationSucceed(true);
                         $confirmationTokenResultsBuilder->withWhatFor($whatFor);
+                        $confirmationTokenResultsBuilder->setTokenId(strval($confirmationTokenModel->id??""));
                         if ($deleteAfterCheck) {
                             ConfirmationTokenModel::find($confirmationTokenModel->id)->delete();
                         }
@@ -790,6 +791,7 @@ class TokensValidation
                 $invitationResultsBuilder->withUserId($invitationModel->userId);
                 if (!self::isExpired(DateTime::createFromFormat('Y-m-d H:i:s', $invitationModel->expire_at))) {
                     if ($invitationModel->whatFor == $whatFor || $whatFor == "default") {
+                        $invitationResultsBuilder->setTokenId(strval($invitationModel->id??""));
                         $invitationResultsBuilder->setValidationSucceed(true);
                         $invitationResultsBuilder->withData($invitationModel->data);
                         $invitationResultsBuilder->withTargetEmail($invitationModel->target_email);

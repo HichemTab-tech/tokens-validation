@@ -27,16 +27,22 @@ class BaseResults
     private ?Exception $exception;
 
     /**
+     * @var string|null Contains the ID of the token that was validated.
+     */
+    private ?string $tokenId;
+
+    /**
      * BaseResults constructor.
      *
      * @param bool $validationSucceed Indicates if the validation process succeeded or not.
      * @param string|null $cause Contains a message explaining why the validation process failed.
      */
-    public function __construct(bool $validationSucceed, ?string $cause = null, ?Exception $exception = null)
+    public function __construct(bool $validationSucceed, ?string $cause = null, ?Exception $exception = null, ?string $tokenId = null)
     {
         $this->validationSucceed = $validationSucceed;
         $this->cause = $cause;
         $this->exception = $exception;
+        $this->tokenId = $tokenId;
     }
 
     /**
@@ -67,6 +73,16 @@ class BaseResults
     public function getException(): ?Exception
     {
         return $this->exception;
+    }
+
+    /**
+     * Getter method for the ID of the token that was validated.
+     *
+     * @return string|null Contains the ID of the token that was validated.
+     */
+    public function getTokenId(): ?string
+    {
+        return $this->tokenId;
     }
 
     /**

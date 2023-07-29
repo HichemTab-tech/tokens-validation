@@ -14,6 +14,7 @@ class BaseResultsBuilder
     private bool $validationSucceed;
     private ?string $cause;
     private ?Exception $exception;
+    private ?string $tokenId;
 
     /**
      * BaseResultsBuilder constructor.
@@ -23,6 +24,7 @@ class BaseResultsBuilder
         $this->validationSucceed = false;
         $this->cause = null;
         $this->exception = null;
+        $this->tokenId = null;
     }
 
     /**
@@ -62,13 +64,25 @@ class BaseResultsBuilder
     }
 
     /**
+     * Sets the ID of the token that was validated.
+     *
+     * @param string|null $tokenId Contains the ID of the token that was validated.
+     * @return $this This instance of the BaseResultsBuilder object.
+     */
+    public function setTokenId(?string $tokenId): self
+    {
+        $this->tokenId = $tokenId;
+        return $this;
+    }
+
+    /**
      * Builds the BaseResults object with the provided values.
      *
      * @return BaseResults The resulting BaseResults object.
      */
     public function build(): BaseResults
     {
-        return new BaseResults($this->validationSucceed, $this->cause, $this->exception);
+        return new BaseResults($this->validationSucceed, $this->cause, $this->exception, $this->tokenId);
     }
 
     /**
