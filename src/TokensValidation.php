@@ -363,6 +363,21 @@ class TokensValidation
     }
 
     /**
+     * @param int $type
+     * @param string $tokenId
+     * @return void
+     */
+    private static function deleteToken(int $type, string $tokenId): void
+    {
+        if ($type == TokensTypes::AUTHENTICATION_BY_TOKEN || $type == TokensTypes::AUTHENTICATION_BY_COOKIE) {
+            AuthTokenModel::where('id', $tokenId)->delete();
+        }
+        elseif ($type == TokensTypes::CONFIRMATION_CODE) {
+            ConfirmationTokenModel::where('id', $tokenId)->delete();
+        }
+    }
+
+    /**
      * @param string $userId
      * @param integer $type
      * @param string|null $oldToken
@@ -609,6 +624,15 @@ class TokensValidation
     }
 
     /**
+     * @param string $tokenId
+     * @return void
+     */
+    public static function deleteAuthToken(string $tokenId): void
+    {
+        self::deleteToken(TokensTypes::AUTHENTICATION_BY_TOKEN, $tokenId);
+    }
+
+    /**
      * @param string $code
      * @param string|null $encryptedUserId
      * @param string $whatFor
@@ -702,6 +726,15 @@ class TokensValidation
             ->setValidationSucceed(false)
             ->setCause("EXCEPTION")
             ->build();
+    }
+
+    /**
+     * @param string $tokenId
+     * @return void
+     */
+    public static function deleteConfirmationToken(string $tokenId): void
+    {
+        self::deleteToken(TokensTypes::CONFIRMATION_CODE, $tokenId);
     }
 
     /**
