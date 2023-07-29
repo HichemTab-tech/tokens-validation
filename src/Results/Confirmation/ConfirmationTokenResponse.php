@@ -20,7 +20,7 @@ class ConfirmationTokenResponse extends BaseResults
 
     public function __construct(ConfirmationTokenResponseBuilder $builder)
     {
-        parent::__construct($builder->isValidationSucceed(), $builder->getCause());
+        parent::__construct($builder->isValidationSucceed(), $builder->getCause(), $builder->getTokenId());
         $this->userId = $builder->getUserId();
         $this->whatFor = $builder->getWhatFor();
     }

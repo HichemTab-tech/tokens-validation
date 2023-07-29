@@ -31,7 +31,7 @@ class AuthTokenResponse extends BaseResults
      */
     public function __construct(AuthTokenResponseBuilder $builder)
     {
-        parent::__construct($builder->isValidationSucceed(), $builder->getCause());
+        parent::__construct($builder->isValidationSucceed(), $builder->getCause(), $builder->getTokenId());
         $this->userId = $builder->getUserId();
         $this->newToken = $builder->getNewToken();
     }

@@ -13,8 +13,8 @@ class BaseResultsBuilder
 {
     private bool $validationSucceed;
     private ?string $cause;
-    private ?Exception $exception;
     private ?string $tokenId;
+    private ?Exception $exception;
 
     /**
      * BaseResultsBuilder constructor.
@@ -23,8 +23,8 @@ class BaseResultsBuilder
     {
         $this->validationSucceed = false;
         $this->cause = null;
-        $this->exception = null;
         $this->tokenId = null;
+        $this->exception = null;
     }
 
     /**
@@ -52,18 +52,6 @@ class BaseResultsBuilder
     }
 
     /**
-     * Sets the exception caused a validation failure.
-     *
-     * @param Exception|null $exception Contains an exception explaining why the validation process failed.
-     * @return $this This instance of the BaseResultsBuilder object.
-     */
-    public function setException(?Exception $exception): self
-    {
-        $this->exception = $exception;
-        return $this;
-    }
-
-    /**
      * Sets the ID of the token that was validated.
      *
      * @param string|null $tokenId Contains the ID of the token that was validated.
@@ -76,13 +64,25 @@ class BaseResultsBuilder
     }
 
     /**
+     * Sets the exception caused a validation failure.
+     *
+     * @param Exception|null $exception Contains an exception explaining why the validation process failed.
+     * @return $this This instance of the BaseResultsBuilder object.
+     */
+    public function setException(?Exception $exception): self
+    {
+        $this->exception = $exception;
+        return $this;
+    }
+
+    /**
      * Builds the BaseResults object with the provided values.
      *
      * @return BaseResults The resulting BaseResults object.
      */
     public function build(): BaseResults
     {
-        return new BaseResults($this->validationSucceed, $this->cause, $this->exception, $this->tokenId);
+        return new BaseResults($this->validationSucceed, $this->cause, $this->tokenId, $this->exception);
     }
 
     /**
@@ -99,5 +99,13 @@ class BaseResultsBuilder
     public function getCause(): ?string
     {
         return $this->cause;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTokenId(): ?string
+    {
+        return $this->tokenId;
     }
 }

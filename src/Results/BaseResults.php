@@ -22,14 +22,14 @@ class BaseResults
     private ?string $cause;
 
     /**
-     * @var Exception|null Contains an exception explaining why the validation process failed.
-     */
-    private ?Exception $exception;
-
-    /**
      * @var string|null Contains the ID of the token that was validated.
      */
     private ?string $tokenId;
+
+    /**
+     * @var Exception|null Contains an exception explaining why the validation process failed.
+     */
+    private ?Exception $exception;
 
     /**
      * BaseResults constructor.
@@ -37,12 +37,12 @@ class BaseResults
      * @param bool $validationSucceed Indicates if the validation process succeeded or not.
      * @param string|null $cause Contains a message explaining why the validation process failed.
      */
-    public function __construct(bool $validationSucceed, ?string $cause = null, ?Exception $exception = null, ?string $tokenId = null)
+    public function __construct(bool $validationSucceed, ?string $cause = null, ?string $tokenId = null, ?Exception $exception = null)
     {
         $this->validationSucceed = $validationSucceed;
         $this->cause = $cause;
-        $this->exception = $exception;
         $this->tokenId = $tokenId;
+        $this->exception = $exception;
     }
 
     /**
@@ -66,16 +66,6 @@ class BaseResults
     }
 
     /**
-     * Getter method for the exception caused a validation failure.
-     *
-     * @return Exception|null Contains an exception explaining why the validation process failed.
-     */
-    public function getException(): ?Exception
-    {
-        return $this->exception;
-    }
-
-    /**
      * Getter method for the ID of the token that was validated.
      *
      * @return string|null Contains the ID of the token that was validated.
@@ -83,6 +73,16 @@ class BaseResults
     public function getTokenId(): ?string
     {
         return $this->tokenId;
+    }
+
+    /**
+     * Getter method for the exception caused a validation failure.
+     *
+     * @return Exception|null Contains an exception explaining why the validation process failed.
+     */
+    public function getException(): ?Exception
+    {
+        return $this->exception;
     }
 
     /**
