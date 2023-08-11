@@ -28,6 +28,7 @@ class TokensValidationProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/tokensvalidation.php', 'tokensvalidation');
         TokensValidation::setConfig(config('tokensvalidation'));
         TokensValidation::prepare();
         $this->app->singleton(TokensValidation::class, function () {
