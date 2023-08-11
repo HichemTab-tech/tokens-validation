@@ -16,12 +16,12 @@
     },
     "require": {
         "php": ">=8.0",
-        "illuminate/database": "^9.52",
-        "illuminate/events": "^9.52",
-        "illuminate/container": "^9.52",
+        "illuminate/database": "^10",
+        "illuminate/events": "^10",
+        "illuminate/container": "^10",
         "defuse/php-encryption": "^2.3",
-        "illuminate/http": "^9.52",
-        "illuminate/console": "^9.52"
+        "illuminate/http": "^10",
+        "illuminate/console": "^10"
     },
     "extra": {
         "laravel": {
