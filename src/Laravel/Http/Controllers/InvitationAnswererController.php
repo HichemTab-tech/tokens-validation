@@ -3,7 +3,7 @@
 
 /** @noinspection PhpUndefinedClassInspection */
 
-namespace HichemtabTech\TokensValidation\Laravel\Http\Controllers;
+namespace App\Http\Controllers;
 use HichemtabTech\TokensValidation\TokensValidation;
 use Illuminate\Http\Request;
 
