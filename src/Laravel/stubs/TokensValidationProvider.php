@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUnused */
 
-namespace HichemtabTech\TokensValidation\Laravel\stubs;
+namespace App\Providers;
 
 use HichemtabTech\TokensValidation\TokensValidation;
 use Illuminate\Support\ServiceProvider;
