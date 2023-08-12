@@ -2,7 +2,6 @@
 
 namespace HichemtabTech\TokensValidation\Laravel\Providers;
 
-use HichemtabTech\TokensValidation\TokensValidation;
 use Illuminate\Support\ServiceProvider;
 
 class TokensValidationProvider extends ServiceProvider
@@ -15,9 +14,6 @@ class TokensValidationProvider extends ServiceProvider
     public function register(): void
     {
         $this->publishConfig();
-        $this->app->singleton(TokensValidation::class, function () {
-            return TokensValidation::class;
-        });
     }
 
     /**
@@ -29,11 +25,6 @@ class TokensValidationProvider extends ServiceProvider
     public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/tokensvalidation.php', 'tokensvalidation');
-        TokensValidation::setConfig(config('tokensvalidation'));
-        TokensValidation::prepare();
-        $this->app->singleton(TokensValidation::class, function () {
-            return TokensValidation::class;
-        });
     }
 
     /** @noinspection PhpUndefinedFunctionInspection */
@@ -42,7 +33,7 @@ class TokensValidationProvider extends ServiceProvider
         $configPath = __DIR__.'/../config/tokensvalidation.php';
         $publishPath = config_path('tokensvalidation.php');
         $this->publishes([$configPath => $publishPath], 'tokensvalidation-config');
-        $providerPath = __DIR__.'/../Providers/TokensValidationProvider.php';
+        $providerPath = __DIR__.'/../stubs/TokensValidationProvider.php';
         $publishPath2 = app_path('Providers/TokensValidationProvider.php');
         $this->publishes([$providerPath => $publishPath2], 'tokensvalidation-provider');
         $controllerPath = __DIR__.'/../Http/Controllers/InvitationAnswererController.php';
