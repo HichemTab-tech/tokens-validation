@@ -1,5 +1,5 @@
 
-![Logo](https://hichemtech.website/assets/img/logo.ico)
+![Logo](https://github.com/HichemTab-tech/tokens-validation/blob/master/meta-data/picture.png)
 
 
 # TokensValidation
