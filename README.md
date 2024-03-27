@@ -32,6 +32,8 @@ TokensValidation is a PHP library designed to generate and verify authentication
 
 ## Installation
 
+> ℹ️ **INFO**: This version is compatible with PHP 8 and above. If you are using PHP 7, you must install version [3.2.2](https://github.com/HichemTab-tech/tokens-validation/tree/3.2.2) of this library.
+
 The TokensValidation library can be installed via Composer by running the following command:
 
 ```bash
@@ -340,7 +342,7 @@ you want just to check the token if its valid, then check it later in another po
 This parameter allows you to specify whether the token will be deleted after the validation succeeded or not.
 
 ```PHP
-$confirmationToken = TokensValidation::createNewConfirmationToken(
+$confirmationToken = TokensValidation::checkConfirmationCode(
         userId: $uid,
         confirmationType: ConfirmationsTokenTypes::SMALL_CODE,
         whatFor: "email-confirmation",
