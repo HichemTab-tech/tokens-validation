@@ -3,28 +3,29 @@
 namespace HichemtabTech\TokensValidation\Results\Invitation;
 
 use HichemtabTech\TokensValidation\Results\BaseResults;
+use HichemtabTech\TokensValidation\Results\BaseResultsBuilder;
 
 class InvitationResponse extends BaseResults
 {
     /**
      * @var string|null
      */
-    private ?string $whatFor;
+    private $whatFor;
 
     /**
      * @var string|null
      */
-    private ?string $userId;
+    private $userId;
 
     /**
      * @var string|null
      */
-    private ?string $target_email;
+    private $target_email;
 
     /**
      * @var string|null
      */
-    private ?string $data;
+    private $data;
 
     public function __construct(InvitationResponseBuilder $builder)
     {
@@ -78,9 +79,9 @@ class InvitationResponse extends BaseResults
     /**
      * Creates a new InvitationResponse object using the builder pattern.
      *
-     * @return InvitationResponseBuilder The builder object.
+     * @return BaseResultsBuilder The builder object.
      */
-    public static function builder(): InvitationResponseBuilder
+    public static function builder(): BaseResultsBuilder
     {
         return new InvitationResponseBuilder();
     }

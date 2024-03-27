@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=7.1",
         "illuminate/database": "^10",
         "illuminate/events": "^10",
         "illuminate/container": "^10",

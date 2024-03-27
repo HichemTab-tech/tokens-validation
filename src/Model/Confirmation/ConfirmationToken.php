@@ -13,27 +13,27 @@ class ConfirmationToken
     /**
      * @var string $userId
      */
-    private string $userId;
+    private $userId;
 
     /**
      * @var int $type
      */
-    private int $type;
+    private $type;
 
     /**
      * @var string $content
      */
-    private string $content;
+    private $content;
 
     /**
      * @var DateTime $expiredAt
      */
-    private DateTime $expiredAt;
+    private $expiredAt;
 
     /**
      * @var string $whatFor
      */
-    private string $whatFor;
+    private $whatFor;
 
     /**
      * ConfirmationToken constructor.

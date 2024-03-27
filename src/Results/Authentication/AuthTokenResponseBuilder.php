@@ -3,6 +3,7 @@
 namespace HichemtabTech\TokensValidation\Results\Authentication;
 
 use HichemtabTech\TokensValidation\Model\Authentication\AuthToken;
+use HichemtabTech\TokensValidation\Results\BaseResults;
 use HichemtabTech\TokensValidation\Results\BaseResultsBuilder;
 
 /**
@@ -15,14 +16,14 @@ class AuthTokenResponseBuilder extends BaseResultsBuilder
      *
      * @var string|null
      */
-    private ?string $userId;
+    private $userId;
 
     /**
      * The new authentication token.
      *
      * @var AuthToken|null
      */
-    private ?AuthToken $newToken;
+    private $newToken;
 
     public function __construct()
     {
@@ -60,9 +61,9 @@ class AuthTokenResponseBuilder extends BaseResultsBuilder
     /**
      * Builds and returns an instance of the AuthTokenResponse class with the configured settings.
      *
-     * @return AuthTokenResponse The resulting AuthTokenResponse instance.
+     * @return BaseResults The resulting AuthTokenResponse instance.
      */
-    public function build(): AuthTokenResponse
+    public function build(): BaseResults
     {
         return new AuthTokenResponse($this);
     }

@@ -1,4 +1,7 @@
-<?php /** @noinspection PhpUnused */
+<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpDynamicAsStaticMethodCallInspection */
+
+/** @noinspection PhpUnused */
 
 namespace HichemtabTech\TokensValidation;
 
@@ -34,27 +37,27 @@ class TokensValidation
     /**
      * @var string $DB_NAME
      */
-    private static string $DB_NAME = '';
+    private static $DB_NAME = '';
 
     /**
      * @var string $DB_PASS
      */
-    private static string $DB_PASS = '';
+    private static $DB_PASS = '';
 
     /**
      * @var string $DB_USER
      */
-    private static string $DB_USER = '';
+    private static $DB_USER = '';
 
     /**
      * @var string $DB_HOST
      */
-    private static string $DB_HOST = '';
+    private static $DB_HOST = '';
 
     /**
      * @var array
      */
-    private static array $config;
+    private static $config;
 
     /**
      * @param array $config
@@ -67,76 +70,76 @@ class TokensValidation
     /**
      * @var float|int
      */
-    private static int|float $AuthTokenExpirationDelay = 60*60*24*7;
+    private static $AuthTokenExpirationDelay = 60*60*24*7;
 
     /**
      * @var float|int
      */
-    private static int|float $ConfirmationTokenExpirationDelay = 60*10;
+    private static $ConfirmationTokenExpirationDelay = 60*10;
 
     /**
      * @var float|int
      */
-    private static int|float $InvitationTokenExpirationDelay = 60*60*24*3;
+    private static $InvitationTokenExpirationDelay = 60*60*24*3;
 
     /**
      * class that extend ConfirmationUrlBuilder::class
      * @see ConfirmationUrlBuilder::class to create a simlaire custom class
      * @var string
      */
-    public static string $ConfirmationUrlBuilder = ConfirmationUrlBuilder::class;
+    public static $ConfirmationUrlBuilder = ConfirmationUrlBuilder::class;
 
     /**
      * class that extend ConfirmationCodeGenerator::class
      * @see ConfirmationCodeGenerator::class to create a simlaire custom class
      * @var string
      */
-    public static string $ConfirmationCodeGenerator = ConfirmationCodeGenerator::class;
+    public static $ConfirmationCodeGenerator = ConfirmationCodeGenerator::class;
 
     /**
      * class that extend AuthTokenGenerator::class
      * @see AuthTokenGenerator::class to create a simlaire custom class
      * @var string
      */
-    public static string $AuthTokenGenerator = AuthTokenGenerator::class;
+    public static $AuthTokenGenerator = AuthTokenGenerator::class;
 
     /**
      * class that extend AuthTokenCookiesHandler::class
      * @see AuthTokenCookiesHandler::class to create a simlaire custom class
      * @var string
      */
-    public static string $AuthTokenCookiesHandler = AuthTokenCookiesHandler::class;
+    public static $AuthTokenCookiesHandler = AuthTokenCookiesHandler::class;
 
     /**
      * class that extend UserIdEncrypter::class
      * @see UserIdEncrypter::class to create a simlaire custom class
      * @var string
      */
-    public static string $UserIdEncrypter = UserIdEncrypter::class;
+    public static $UserIdEncrypter = UserIdEncrypter::class;
 
     /**
      * class that extend InvitationUrlBuilder::class
      * @see InvitationUrlBuilder::class to create a simlaire custom class
      * @var string
      */
-    public static string $InvitationUrlBuilder = InvitationUrlBuilder::class;
+    public static $InvitationUrlBuilder = InvitationUrlBuilder::class;
 
     /**
      * class that extend InvitationTokenGenerator::class
      * @see InvitationTokenGenerator::class to create a simlaire custom class
      * @var string
      */
-    public static string $InvitationTokenGenerator = InvitationTokenGenerator::class;
+    public static $InvitationTokenGenerator = InvitationTokenGenerator::class;
 
     /**
      * @var string
      */
-    public static string $InvitationBaseUrl = "";
+    public static $InvitationBaseUrl = "";
 
     /**
      * @var string[]
      */
-    private static array $features = ['AuthTokens', 'ConfirmationToken'];
+    private static $features = ['AuthTokens', 'ConfirmationToken'];
 
     /**
      * @param string[] $features
@@ -149,7 +152,7 @@ class TokensValidation
     /**
      * @return float|int
      */
-    public static function getAuthTokenExpirationDelay(): float|int
+    public static function getAuthTokenExpirationDelay()
     {
         return self::$AuthTokenExpirationDelay;
     }
@@ -157,7 +160,7 @@ class TokensValidation
     /**
      * @param float|int $AuthTokenExpirationDelay
      */
-    public static function setAuthTokenExpirationDelay(float|int $AuthTokenExpirationDelay): void
+    public static function setAuthTokenExpirationDelay($AuthTokenExpirationDelay): void
     {
         self::$AuthTokenExpirationDelay = $AuthTokenExpirationDelay;
     }
@@ -165,7 +168,7 @@ class TokensValidation
     /**
      * @return float|int
      */
-    public static function getConfirmationTokenExpirationDelay(): float|int
+    public static function getConfirmationTokenExpirationDelay()
     {
         return self::$ConfirmationTokenExpirationDelay;
     }
@@ -173,7 +176,7 @@ class TokensValidation
     /**
      * @param float|int $ConfirmationTokenExpirationDelay
      */
-    public static function setConfirmationTokenExpirationDelay(float|int $ConfirmationTokenExpirationDelay): void
+    public static function setConfirmationTokenExpirationDelay($ConfirmationTokenExpirationDelay): void
     {
         self::$ConfirmationTokenExpirationDelay = $ConfirmationTokenExpirationDelay;
     }
@@ -181,7 +184,7 @@ class TokensValidation
     /**
      * @param float|int $InvitationTokenExpirationDelay
      */
-    public static function setInvitationTokenExpirationDelay(float|int $InvitationTokenExpirationDelay): void
+    public static function setInvitationTokenExpirationDelay($InvitationTokenExpirationDelay): void
     {
         self::$InvitationTokenExpirationDelay = $InvitationTokenExpirationDelay;
     }
@@ -189,7 +192,7 @@ class TokensValidation
     /**
      * @return float|int
      */
-    public static function getInvitationTokenExpirationDelay(): float|int
+    public static function getInvitationTokenExpirationDelay()
     {
         return self::$InvitationTokenExpirationDelay;
     }
@@ -389,7 +392,7 @@ class TokensValidation
      * @return AuthToken|ConfirmationToken
      * @throws Exception
      */
-    private static function createNewToken(string $userId, int $type, string $oldToken = null, string $fingerPrint = "", int $confirmationType = null, string $whatFor = "default", float|int $expirationDelay = -1, bool|null $singleTokenPerTime = null): ConfirmationToken|AuthToken
+    private static function createNewToken(string $userId, int $type, string $oldToken = null, string $fingerPrint = "", int $confirmationType = null, string $whatFor = "default", $expirationDelay = -1, ?bool $singleTokenPerTime = null)
     {
         $datetime = new DateTime();
         if ($type == TokensTypes::AUTHENTICATION_BY_TOKEN || $type == TokensTypes::AUTHENTICATION_BY_COOKIE) {
@@ -489,9 +492,16 @@ class TokensValidation
      * @return AuthToken
      * @throws Exception
      */
-    public static function createNewAuthToken(string $userId, string $fingerPrint = "", bool $usingCookies = false, float|int $expirationDelay = -1): AuthToken
+    public static function createNewAuthToken(string $userId, string $fingerPrint = "", bool $usingCookies = false, $expirationDelay = -1): AuthToken
     {
-        return self::createNewToken(userId: $userId, type: $usingCookies ? TokensTypes::AUTHENTICATION_BY_COOKIE : TokensTypes::AUTHENTICATION_BY_TOKEN, fingerPrint: $fingerPrint, expirationDelay: $expirationDelay);
+        return self::createNewToken(
+            $userId,
+            $usingCookies ? TokensTypes::AUTHENTICATION_BY_COOKIE : TokensTypes::AUTHENTICATION_BY_TOKEN,
+            null,
+            $fingerPrint,
+            "default",
+            $expirationDelay
+        );
     }
 
     /**
@@ -503,15 +513,17 @@ class TokensValidation
      * @return ConfirmationToken
      * @throws Exception
      */
-    public static function createNewConfirmationToken(string $userId, int $confirmationType = ConfirmationsTokenTypes::SMALL_CODE, string $whatFor = "default", float|int $expirationDelay = -1, bool|null $singleTokenPerTime = null): ConfirmationToken
+    public static function createNewConfirmationToken(string $userId, int $confirmationType = ConfirmationsTokenTypes::SMALL_CODE, string $whatFor = "default", $expirationDelay = -1, ?bool $singleTokenPerTime = null): ConfirmationToken
     {
         return self::createNewToken(
-            userId: $userId,
-            type: TokensTypes::CONFIRMATION_CODE,
-            confirmationType: $confirmationType,
-            whatFor: $whatFor,
-            expirationDelay: $expirationDelay,
-            singleTokenPerTime: $singleTokenPerTime
+            $userId,
+            TokensTypes::CONFIRMATION_CODE,
+            null,
+            null,
+            $confirmationType,
+            $whatFor,
+            $expirationDelay,
+            $singleTokenPerTime
         );
     }
 
@@ -542,10 +554,10 @@ class TokensValidation
      * @param string $fingerPrint
      * @param string|null $authToken
      * @param bool $regenerate
-     * @return AuthTokenResponse
+     * @return Results\BaseResults
      * @throws Exception
      */
-    private static function checkAuthToken_(string $fingerPrint, ?string $authToken, bool $regenerate): AuthTokenResponse
+    private static function checkAuthToken_(string $fingerPrint, ?string $authToken, bool $regenerate): Results\BaseResults
     {
         $authTokenResultBuilder = AuthTokenResponse::builder()
             ->setValidationSucceed(false);
@@ -590,10 +602,10 @@ class TokensValidation
     /**
      * @param string $fingerPrint
      * @param string|null $authToken
-     * @return AuthTokenResponse
+     * @return Results\BaseResults
      * @throws Exception
      */
-    public static function checkAuthTokenWithoutRegenerate(string $fingerPrint = "", ?string $authToken = null): AuthTokenResponse
+    public static function checkAuthTokenWithoutRegenerate(string $fingerPrint = "", ?string $authToken = null): Results\BaseResults
     {
         return self::checkAuthToken_($fingerPrint, $authToken, false);
     }
@@ -601,10 +613,10 @@ class TokensValidation
     /**
      * @param string $fingerPrint
      * @param string|null $authToken
-     * @return AuthTokenResponse
+     * @return Results\BaseResults
      * @throws Exception
      */
-    public static function checkAuthToken(string $fingerPrint = "", ?string $authToken = null): AuthTokenResponse
+    public static function checkAuthToken(string $fingerPrint = "", ?string $authToken = null): Results\BaseResults
     {
         return self::checkAuthToken_($fingerPrint, $authToken, true);
     }
@@ -637,9 +649,9 @@ class TokensValidation
      * @param string|null $encryptedUserId
      * @param string $whatFor
      * @param bool $deleteAfterCheck
-     * @return ConfirmationTokenResponse
+     * @return Results\BaseResults
      */
-    public static function checkConfirmationCode(string $code, string $encryptedUserId = null, string $whatFor = "default", bool $deleteAfterCheck = true): ConfirmationTokenResponse
+    public static function checkConfirmationCode(string $code, string $encryptedUserId = null, string $whatFor = "default", bool $deleteAfterCheck = true): Results\BaseResults
     {
         $confirmationTokenResultsBuilder = ConfirmationTokenResponse::builder()
             ->setValidationSucceed(false);
@@ -692,9 +704,9 @@ class TokensValidation
      * @param string $url
      * @param string $whatFor
      * @param bool $deleteAfterCheck
-     * @return ConfirmationTokenResponse
+     * @return Results\BaseResults
      */
-    public static function checkConfirmationUrl(string $url, string $whatFor = "default", bool $deleteAfterCheck = true): ConfirmationTokenResponse
+    public static function checkConfirmationUrl(string $url, string $whatFor = "default", bool $deleteAfterCheck = true): Results\BaseResults
     {
         /** @var UserIdAndToken $userIdAndToken */
         $userIdAndToken = call_user_func_array([new TokensValidation::$ConfirmationUrlBuilder(), 'getUserIdAndTokenFromUrl'], [$url]);
@@ -712,9 +724,9 @@ class TokensValidation
      * @param array $_GET_ARRAY
      * @param string $whatFor
      * @param bool $deleteAfterCheck
-     * @return ConfirmationTokenResponse
+     * @return Results\BaseResults
      */
-    public static function checkConfirmationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default", bool $deleteAfterCheck = true): ConfirmationTokenResponse
+    public static function checkConfirmationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default", bool $deleteAfterCheck = true): Results\BaseResults
     {
         /** @var UserIdAndToken $userIdAndToken */
         $userIdAndToken = call_user_func_array([new TokensValidation::$ConfirmationUrlBuilder(), 'getUserIdAndTokenFromGET'], [$_GET_ARRAY]);
@@ -758,7 +770,11 @@ class TokensValidation
      */
     private static function regenerateAuthToken($userId, $oldToken, $tokenType): AuthToken
     {
-        return self::createNewToken(userId: $userId, type: $tokenType, oldToken: $oldToken);
+        return self::createNewToken(
+            $userId,
+            $tokenType,
+            $oldToken
+        );
     }
 
     /**
@@ -770,7 +786,7 @@ class TokensValidation
      * @return Invitation
      * @throws Exception
      */
-    public static function createInvitation(string $userId, string $target_email, float|int $expirationDelay = -1, string $whatFor = "default", string $data = ""): Invitation
+    public static function createInvitation(string $userId, string $target_email, $expirationDelay = -1, string $whatFor = "default", string $data = ""): Invitation
     {
         $datetime = new DateTime();
         if ($expirationDelay == -1) {
@@ -810,9 +826,9 @@ class TokensValidation
      * @param string $token
      * @param string $whatFor
      * @param bool $thenAccept
-     * @return InvitationResponse
+     * @return Results\BaseResults
      */
-    public static function checkInvitationToken(string $token, string $whatFor = "default", bool $thenAccept = false): InvitationResponse
+    public static function checkInvitationToken(string $token, string $whatFor = "default", bool $thenAccept = false): Results\BaseResults
     {
         $invitationResultsBuilder = InvitationResponse::builder()
             ->setValidationSucceed(false);
@@ -858,9 +874,9 @@ class TokensValidation
      * @param string $url
      * @param string $whatFor
      * @param bool $thenAccept
-     * @return InvitationResponse
+     * @return Results\BaseResults
      */
-    public static function checkInvitationUrl(string $url, string $whatFor = "default", bool $thenAccept = false): InvitationResponse
+    public static function checkInvitationUrl(string $url, string $whatFor = "default", bool $thenAccept = false): Results\BaseResults
     {
         return self::checkInvitationToken(call_user_func_array([new TokensValidation::$InvitationUrlBuilder(), 'getTokenFromUrl'], [$url]), $whatFor, $thenAccept);
     }
@@ -869,9 +885,9 @@ class TokensValidation
      * @param array $_GET_ARRAY
      * @param string $whatFor
      * @param bool $thenAccept
-     * @return InvitationResponse
+     * @return Results\BaseResults
      */
-    public static function checkInvitationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default", bool $thenAccept = false): InvitationResponse
+    public static function checkInvitationUrlParamsFromGET(array $_GET_ARRAY, string $whatFor = "default", bool $thenAccept = false): Results\BaseResults
     {
         return self::checkInvitationToken(call_user_func_array([new TokensValidation::$InvitationUrlBuilder(), 'getTokenFromGET'], [$_GET_ARRAY]), $whatFor, $thenAccept);
     }
@@ -880,9 +896,9 @@ class TokensValidation
      * @param Request $request
      * @param string $whatFor
      * @param bool $thenAccept
-     * @return InvitationResponse
+     * @return Results\BaseResults
      */
-    public static function checkInvitationRequest(Request $request, string $whatFor = "default", bool $thenAccept = false): InvitationResponse
+    public static function checkInvitationRequest(Request $request, string $whatFor = "default", bool $thenAccept = false): Results\BaseResults
     {
         return self::checkInvitationToken(call_user_func_array([new TokensValidation::$InvitationUrlBuilder(), 'getTokenFromRequest'], [$request]), $whatFor, $thenAccept);
     }

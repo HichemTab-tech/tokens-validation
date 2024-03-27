@@ -11,10 +11,10 @@ use Exception;
  */
 class BaseResultsBuilder
 {
-    private bool $validationSucceed;
-    private ?string $cause;
-    private ?string $tokenId;
-    private ?Exception $exception;
+    private $validationSucceed;
+    private $cause;
+    private $tokenId;
+    private $exception;
 
     /**
      * BaseResultsBuilder constructor.

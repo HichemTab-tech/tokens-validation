@@ -3,6 +3,7 @@
 namespace HichemtabTech\TokensValidation\Results\Confirmation;
 
 use HichemtabTech\TokensValidation\Results\BaseResults;
+use HichemtabTech\TokensValidation\Results\BaseResultsBuilder;
 
 /**
  * Represents a response to a confirmation token request.
@@ -12,11 +13,11 @@ class ConfirmationTokenResponse extends BaseResults
     /**
      * @var string|null
      */
-    private ?string $userId;
+    private $userId;
     /**
      * @var string|null
      */
-    private ?string $whatFor;
+    private $whatFor;
 
     public function __construct(ConfirmationTokenResponseBuilder $builder)
     {
@@ -72,9 +73,9 @@ class ConfirmationTokenResponse extends BaseResults
     /**
      * Creates a new ConfirmationTokenResponse object using the builder pattern.
      *
-     * @return ConfirmationTokenResponseBuilder The builder object.
+     * @return BaseResultsBuilder The builder object.
      */
-    public static function builder(): ConfirmationTokenResponseBuilder
+    public static function builder(): BaseResultsBuilder
     {
         return new ConfirmationTokenResponseBuilder();
     }

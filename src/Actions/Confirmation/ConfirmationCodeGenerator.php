@@ -18,10 +18,13 @@ class ConfirmationCodeGenerator
      */
     public function generate(int $confirmationType): string
     {
-        return match ($confirmationType) {
-            ConfirmationsTokenTypes::SMALL_CODE => TokensValidation::generateAlphaNumKey(6, true),
-            ConfirmationsTokenTypes::IN_URL => TokensValidation::generateAlphaNumKey(15),
-            default => "",
-        };
+        switch ($confirmationType) {
+            case ConfirmationsTokenTypes::SMALL_CODE:
+                return TokensValidation::generateAlphaNumKey(6, true);
+            case ConfirmationsTokenTypes::IN_URL:
+                return TokensValidation::generateAlphaNumKey(15);
+            default:
+                return "";
+        }
     }
 }

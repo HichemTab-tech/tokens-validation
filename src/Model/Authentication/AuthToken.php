@@ -12,28 +12,28 @@ class AuthToken
     /**
      * @var string $userId
      */
-    private string $userId;
+    private $userId;
     /**
      * @var integer $type
      */
-    private int $type;
+    private $type;
     /**
      * @var string $content
      */
-    private string $content;
+    private $content;
     /**
      * @var DateTime $expiredAt
      */
-    private DateTime $expiredAt;
+    private $expiredAt;
     /**
      * @var string $userAgent
      */
-    private string $userAgent;
+    private $userAgent;
 
     /**
      * @var string $fingerprint
      */
-    private string $fingerprint;
+    private $fingerprint;
 
     /**
      * @param $userId

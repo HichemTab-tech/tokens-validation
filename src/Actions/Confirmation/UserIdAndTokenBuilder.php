@@ -11,12 +11,12 @@ class UserIdAndTokenBuilder {
     /**
      * @var string|null The user ID.
      */
-    private ?string $userId = null;
+    private $userId = null;
 
     /**
      * @var string|null The token.
      */
-    private ?string $token = null;
+    private $token = null;
 
     /**
      * Sets the user ID.
