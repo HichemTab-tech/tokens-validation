@@ -9,27 +9,27 @@ class ConfirmationTokenBuilder
     /**
      * @var string|null $userId
      */
-    private ?string $userId = null;
+    private $userId = null;
 
     /**
      * @var int|null $type
      */
-    private ?int $type = null;
+    private $type = null;
 
     /**
      * @var string|null $content
      */
-    private ?string $content = null;
+    private $content = null;
 
     /**
      * @var DateTime|null $expiredAt
      */
-    private ?DateTime $expiredAt = null;
+    private $expiredAt = null;
 
     /**
      * @var string|null $whatFor
      */
-    private ?string $whatFor = null;
+    private $whatFor = null;
 
     /**
      * Sets the user ID for the token.

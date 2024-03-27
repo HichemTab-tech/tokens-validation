@@ -2,6 +2,7 @@
 
 namespace HichemtabTech\TokensValidation\Results\Invitation;
 
+use HichemtabTech\TokensValidation\Results\BaseResults;
 use HichemtabTech\TokensValidation\Results\BaseResultsBuilder;
 
 /**
@@ -12,22 +13,22 @@ class InvitationResponseBuilder extends BaseResultsBuilder
     /**
      * @var string|null
      */
-    private ?string $whatFor;
+    private $whatFor;
 
     /**
      * @var string|null
      */
-    private ?string $userId;
+    private $userId;
 
     /**
      * @var string|null
      */
-    private ?string $target_email;
+    private $target_email;
 
     /**
      * @var string|null
      */
-    private ?string $data;
+    private $data;
 
     public function __construct()
     {
@@ -79,9 +80,9 @@ class InvitationResponseBuilder extends BaseResultsBuilder
     }
 
     /**
-     * @return InvitationResponse
+     * @return BaseResults
      */
-    public function build(): InvitationResponse
+    public function build(): BaseResults
     {
         return new InvitationResponse($this);
     }

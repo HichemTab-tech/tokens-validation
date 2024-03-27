@@ -12,32 +12,32 @@ class AuthTokenBuilder
     /**
      * @var string
      */
-    private string $userId;
+    private $userId;
 
     /**
      * @var int
      */
-    private int $type;
+    private $type;
 
     /**
      * @var string
      */
-    private string $content;
+    private $content;
 
     /**
      * @var DateTime
      */
-    private DateTime $expiredAt;
+    private $expiredAt;
 
     /**
      * @var string
      */
-    private string $userAgent;
+    private $userAgent;
 
     /**
      * @var string
      */
-    private string $fingerprint;
+    private $fingerprint;
 
     /**
      * @param string $userId

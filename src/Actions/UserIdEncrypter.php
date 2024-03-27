@@ -21,7 +21,7 @@ class UserIdEncrypter
      *
      * @var string
      */
-    protected static string $encrypterKey = 'def00000d92d8449abd99476b92ce79555cd81fa28173ed18f0162419b8a7332a00281c2c1e6568d67e3901cfd55fafdd9112d206feebb1d7e8acaf4dc08f0d6ab576a46';
+    protected static $encrypterKey = 'def00000d92d8449abd99476b92ce79555cd81fa28173ed18f0162419b8a7332a00281c2c1e6568d67e3901cfd55fafdd9112d206feebb1d7e8acaf4dc08f0d6ab576a46';
 
     /**
      * @param $userId

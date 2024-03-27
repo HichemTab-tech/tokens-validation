@@ -13,42 +13,42 @@ class Invitation
     /**
      * @var string|null The unique identifier for the invitation.
      */
-    protected ?string $id;
+    protected $id;
 
     /**
      * @var string|null The unique identifier for the user who created the invitation.
      */
-    protected ?string $userId;
+    protected $userId;
 
     /**
      * @var string|null The email address of the user who the invitation is being sent to.
      */
-    private ?string $target_email;
+    private $target_email;
 
     /**
      * @var string|null The content of the invitation message.
      */
-    private ?string $content;
+    private $content;
 
     /**
      * @var DateTime|null The date and time when the invitation will expire.
      */
-    private ?DateTime $expire_at;
+    private $expire_at;
 
     /**
      * @var string|null The purpose of the invitation.
      */
-    private ?string $whatFor;
+    private $whatFor;
 
     /**
      * @var string|null Additional data related to the invitation.
      */
-    private ?string $data;
+    private $data;
 
     /**
      * @var bool Whether the invitation has been accepted.
      */
-    private bool $accepted;
+    private $accepted;
 
     /**
      * Invitation constructor.
