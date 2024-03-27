@@ -13,42 +13,42 @@ class InvitationBuilder
     /**
      * @var string|null $id The invitation ID.
      */
-    private $id = null;
+    private ?string $id = null;
 
     /**
      * @var string|null $userId The user ID associated with the invitation.
      */
-    private $userId;
+    private ?string $userId;
 
     /**
      * @var string|null $targetEmail The email address that the invitation is being sent to.
      */
-    private $targetEmail = null;
+    private ?string $targetEmail = null;
 
     /**
      * @var string|null $content The message content of the invitation.
      */
-    private $content = null;
+    private ?string $content = null;
 
     /**
      * @var DateTime|null $expireAt The expiration date and time of the invitation.
      */
-    private $expireAt = null;
+    private ?DateTime $expireAt = null;
 
     /**
      * @var string|null $whatFor The purpose of the invitation.
      */
-    private $whatFor = null;
+    private ?string $whatFor = null;
 
     /**
      * @var string|null $data Additional data associated with the invitation.
      */
-    private $data = null;
+    private ?string $data = null;
 
     /**
      * @var bool $accepted Whether the invitation has been accepted or not.
      */
-    private $accepted = false;
+    private bool $accepted = false;
 
     /**
      * @param string|null $userId

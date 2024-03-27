@@ -9,12 +9,12 @@ class UserIdAndToken {
     /**
      * @var string The user ID.
      */
-    private $userId;
+    private string $userId;
 
     /**
      * @var string The token.
      */
-    private $token;
+    private string $token;
 
     /**
      * UserIdAndToken constructor.

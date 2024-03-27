@@ -14,22 +14,22 @@ class BaseResults
     /**
      * @var bool Indicates if the validation process succeeded or not.
      */
-    private $validationSucceed;
+    private bool $validationSucceed;
 
     /**
      * @var string|null Contains a message explaining why the validation process failed.
      */
-    private $cause;
+    private ?string $cause;
 
     /**
      * @var string|null Contains the ID of the token that was validated.
      */
-    private $tokenId;
+    private ?string $tokenId;
 
     /**
      * @var Exception|null Contains an exception explaining why the validation process failed.
      */
-    private $exception;
+    private ?Exception $exception;
 
     /**
      * BaseResults constructor.
